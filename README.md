@@ -48,4 +48,4 @@ ionic run android
 
 ##ios
 
-- safari > preferences > dev menu checkbox > develop on toolbar > simulator 
+- safari > preferences > dev menu checkbox > develop on toolbar > simulator
