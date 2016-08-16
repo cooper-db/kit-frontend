@@ -5,14 +5,18 @@ angular.module('KitApp.directives', [])
 .directive('kaLogin', function() {
   return {
     restrict: 'E',
-    templateUrl: 'templates/login.html'
+    templateUrl: 'templates/login.html',
+    controller: 'LoginController',
+    controllerAs: 'LC'
   };
 })
 
 .directive('kaSignup', function() {
   return {
     restrict: 'E',
-    templateUrl: 'templates/signup.html'
+    templateUrl: 'templates/signup.html',
+    controller: 'SignupConroller',
+    controllerAs: 'SC'
   };
 })
 

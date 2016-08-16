@@ -15,7 +15,6 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -45,7 +44,20 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
     url: '/home',
     views: {
       'tab-home': {
-        templateUrl: 'templates/tab-home.html'
+        templateUrl: 'templates/tab-home.html',
+        controller: 'HomeController',
+        controllerAs: 'HC'
+      }
+    }
+  })
+
+  .state('tab.home-signup', {
+    url: '/home/signup',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/home-signup.html',
+        controller: 'SignupConroller',
+        controllerAs: 'SC'
       }
     }
   })
