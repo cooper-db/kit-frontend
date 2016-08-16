@@ -19,4 +19,13 @@ angular.module('KitApp.controllers', [])
 .controller('SignupConroller', ['SignupService', function(SignupService) {
   var vm = this;
   vm.message = SignupService.message;
+}])
+
+.controller('ContactController', ['ContactService', function(ContactService) {
+  var vm = this;
+  vm.message = ContactService.message;
+
+  vm.getContacts = ContactService.getContacts; 
+
+
 }]);

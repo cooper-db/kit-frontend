@@ -19,4 +19,20 @@ angular.module('KitApp.services', [])
 .service('SignupService', function() {
   var vm = this;
   vm.message = 'hello';
-});
+})
+
+.service('ContactService', ['$http', function($http) {
+  var sv = this;
+  sv.message = 'this is the contact service';
+
+  sv.getContacts = function(id) {
+    $http.get('http://localhost:3000/auth/login')
+    .then(function(response) {
+    console.log('getContacts response: ', response);
+    })
+    .catch(function(err) {
+      console.log('getContacts ERR:', err);
+    });
+  };
+
+}]);
