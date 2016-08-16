@@ -56,7 +56,7 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
     views: {
       'tab-home': {
         templateUrl: 'templates/home-signup.html',
-        controller: 'SignupConroller',
+        controller: 'SignupController',
         controllerAs: 'SC'
       }
     }
@@ -67,6 +67,17 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
     views: {
       'tab-contacts': {
         templateUrl: 'templates/tab-contacts.html'
+      }
+    }
+  })
+
+  .state('tab.account', {
+    url: '/account',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountController',
+        controllerAs: 'AC'
       }
     }
   });
