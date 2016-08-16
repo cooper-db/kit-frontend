@@ -1,0 +1,12 @@
+<div class="card padding">
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Username</span>
+    <input type="text" placeholder="Username" ng-model="username">
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Password</span>
+    <input type="password" placeholder="Password" ng-model="password">
+  </label>
+  <button class="button button-block button-stable" ng-click="LC.login(username, password)">Login</button>
+  <a href="#/tab/home/signup" class="button button-block button-stable">Signup</a>
+</div>
