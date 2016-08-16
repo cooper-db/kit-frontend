@@ -2,9 +2,11 @@
 
 angular.module('KitApp.controllers', [])
 
-.controller('HomeController', [function() {
+.controller('HomeController', ['LoginService', function(LoginService) {
 
   var vm = this;
+
+  vm.loginView = LoginService.loginView;
 
 }])
 
@@ -12,7 +14,7 @@ angular.module('KitApp.controllers', [])
 
   var vm = this;
 
-  vm.showLogin = LoginService.showLogin;
+  vm.loginView = LoginService.loginView;
 
   vm.login = function(username, password) {
     LoginService.login(username, password);
