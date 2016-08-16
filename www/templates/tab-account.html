@@ -1,5 +1,6 @@
 <ion-view>
   <ion-content class="padding">
-    <button class="button button-block button-assertive" ng-click="AC.logout()">Logout</button>
+    <ka-login ng-show="AC.showLogin.show"></ka-login>
+    <button class="button button-block button-assertive" ng-click="AC.logout()" ng-hide="AC.showLogin.show">Logout</button>
   </ion-content>
 </ion-view>

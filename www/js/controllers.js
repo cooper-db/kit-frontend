@@ -2,32 +2,28 @@
 
 angular.module('KitApp.controllers', [])
 
-.controller('HomeController', ['$rootScope', '$window', function($rootScope, $window) {
+.controller('HomeController', [function() {
+
   var vm = this;
-  vm.showLogin = true;
-  vm.showContactSuggestion = true;
+
 }])
 
-.controller('LoginController', ['$rootScope', 'LoginService', function($window, LoginService) {
+.controller('AccountController', ['LoginService', '$location', '$window', function(LoginService, $location, $window) {
 
   var vm = this;
+
+  vm.showLogin = LoginService.showLogin;
 
   vm.login = function(username, password) {
     LoginService.login(username, password);
   };
 
-}])
-
-.controller('AccountController', ['$window', 'LoginService', function($window, LoginService) {
-
-  var vm = this;
-
   vm.logout = function() {
     LoginService.logout();
   };
 
-}])
 
+}])
 
 .controller('SignupController', ['SignupService', function(SignupService) {
   var vm = this;
