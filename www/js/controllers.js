@@ -38,10 +38,12 @@ angular.module('KitApp.controllers', [])
   var vm = this;
   vm.message = ContactService.message;
 
+  //Works
   vm.getContacts = function() {     $cordovaContacts.pickContact()
      .then(function(result) {         console.log(result);     }); }
 
-  vm.getNativeContact = ContactService.getNativeContact;
-  vm.getNativeContacts = ContactService.getNativeContacts;
+     //Doesn't Work
+  // vm.getNativeContact = ContactService.getNativeContact;
+  // vm.getNativeContacts = ContactService.getNativeContacts;
 
 }]);
