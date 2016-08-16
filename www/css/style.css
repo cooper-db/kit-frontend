@@ -1,1 +1,40 @@
 /* Empty. Add your own CSS if you like */
+.home {
+  background-color: #581908;
+}
+
+.headline {
+  font-family: 'Londrina Outline', cursive;
+  font-size: 20em;
+  text-align: center;
+  color:white;
+}
+
+.byline {
+  font-family: 'Londrina Outline', cursive;
+  font-size: 5em;
+  color:white;
+  text-align:center;
+
+}
+
+.signin {
+  color:white;
+  text-align: center;
+}
+
+div.tab-nav.tabs {
+  background-color: #983628;
+}
+
+ion-header-bar.bar-stable.bar {
+  background-color: #983628;
+}
+
+i {
+  color:white;
+}
+
+span.tab-title {
+  color:white;
+}
