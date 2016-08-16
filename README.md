@@ -64,4 +64,4 @@ ionic run android
       console.log("Hello from Device Ready");
     console.log(navigator.contacts);
     }```
-- ```<button class="button button-positive button-block" ng-click="getContact()">   Get Contact </button>```
+- ```<button class="button button-positive button-block" ng-click="getContact()"> Get Contact </button>```
