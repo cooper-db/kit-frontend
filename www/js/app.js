@@ -66,7 +66,9 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
     url: '/contacts',
     views: {
       'tab-contacts': {
-        templateUrl: 'templates/tab-contacts.html'
+        templateUrl: 'templates/tab-contacts.html',
+        controller: 'ContactController',
+        controllerAs: 'CC'
       }
     }
   })
