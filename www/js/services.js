@@ -1,5 +1,5 @@
 'use strict';
-angular.module('starter.services', [])
+angular.module('KitApp.services', [])
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
