@@ -6,8 +6,8 @@ angular.module('KitApp.directives', [])
   return {
     restrict: 'E',
     templateUrl: 'templates/login.html',
-    controller: 'LoginController',
-    controllerAs: 'LC'
+    controller: 'AccountController',
+    controllerAs: 'AC'
   };
 })
 
