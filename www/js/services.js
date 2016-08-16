@@ -9,7 +9,7 @@ angular.module('KitApp.services', [])
 
   vm.getContacts = ContactService.getContacts;
 
-  vm.contacts = [];
+  vm.contacts;
 
   vm.login = function(username, password) {
     $http.post('http://localhost:3000/auth/login', {username: username, password: password})
@@ -18,8 +18,10 @@ angular.module('KitApp.services', [])
       $window.sessionStorage.token = response.data.token;
       $window.sessionStorage.id = response.data.id;
       //get contact list here:
-      vm.getContacts($window.sessionStorage.id);
-      // vm.contacts =
+      // vm.getContacts($window.sessionStorage.id)
+
+
+
     })
     .catch(function(err) {
       console.log(err);
@@ -38,18 +40,24 @@ angular.module('KitApp.services', [])
   vm.message = 'hello';
 })
 
-.service('ContactService', ['$http', function($http) {
+.service('ContactService', ['$http', '$window', function($http, $window) {
   var sv = this;
 
-  sv.getContacts = function(id) {
-    $http.get('http://localhost:3000/users/' + id + '/contacts')
+  sv.contacts = {};
+
+  //sv.getContacts = function(id) {
+    var id = $window.sessionStorage.id;
+     $http.get('http://localhost:3000/users/' + id + '/contacts')
     .then(function(response) {
-    console.log('getContacts response: ', response);
+      console.log('getContacts response: ', response.data);
+      sv.contacts.arr = response.data;
+      sv.contacts.length = response.data.length;
+      // return response.data;
     })
     .catch(function(err) {
       console.log('getContacts ERR:', err);
     });
-  };
+  //};
 
 }])
 

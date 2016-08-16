@@ -34,10 +34,12 @@ angular.module('KitApp.controllers', [])
   vm.message = SignupService.message;
 }])
 
-.controller('ContactController', ['LoginService', function(LoginService) {
+.controller('ContactController', ['ContactService', function(ContactService) {
   var vm = this;
-  vm.message = LoginService.message;
 
-  vm.contacts = LoginService.contacts;
+  vm.message = 'contact controller';
 
-}]);
+  vm.contacts = ContactService.contacts;
+
+
+}])
