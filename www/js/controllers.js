@@ -34,11 +34,14 @@ angular.module('KitApp.controllers', [])
   vm.message = SignupService.message;
 }])
 
-.controller('ContactController', ['ContactService', function(ContactService) {
+.controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts) {
   var vm = this;
   vm.message = ContactService.message;
 
-  vm.getContacts = ContactService.getContacts; 
+  vm.getContacts = function() {     $cordovaContacts.pickContact()
+     .then(function(result) {         console.log(result);     }); }
 
+  vm.getNativeContact = ContactService.getNativeContact;
+  vm.getNativeContacts = ContactService.getNativeContacts;
 
 }]);

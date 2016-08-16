@@ -6,7 +6,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'KitApp.directives'])
+
+
+angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'KitApp.directives', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -88,3 +90,7 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
   $urlRouterProvider.otherwise('/tab/home');
 
 });
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+  console.log(navigator.contacts);
+}

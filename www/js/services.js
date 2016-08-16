@@ -27,7 +27,7 @@ angular.module('KitApp.services', [])
   vm.message = 'hello';
 })
 
-.service('ContactService', ['$http', function($http) {
+.service('ContactService', ['$http', '$cordovaContacts', function($http, $cordovaContacts) {
   var sv = this;
   sv.message = 'this is the contact service';
 
@@ -40,5 +40,19 @@ angular.module('KitApp.services', [])
       console.log('getContacts ERR:', err);
     });
   };
+
+  sv.getNativeContact = function() {
+    $cordovaContacts.pickContact()
+    .then(function(result) {
+      console.log(result);
+  });
+};
+
+  sv.getNativeContacts = function() {
+     $cordovaContacts.find({multiple: true})
+     .then(function(result) {
+       console.log(result);
+  });
+};
 
 }]);
