@@ -1,10 +1,23 @@
+<!-- CC (ContactController) -->
+
 <ion-view>
   <ion-content class="padding">
+    <hr>
+    <hr>
+    <hr>
+    <button class="button button-stable button-block" ng-click="CC.func()">Button</button>
+    <h1>{{CC.contacts.arr}}</h1>
     <h1>{{CC.message}}</h1>
+    <div ng-repeat="contact in CC.contacts">
+        {{contact}}
+        <hr>
+    </div>
 
     <!-- Jimmy's contact button -->
     <button class="button button-positive button-block" ng-click="CC.getNativeContact()"> Get Contact </button>
     <button class="button button-positive button-block" ng-click="CC.showAddContactForm = !CC.showAddContactForm"> Add Contact </button>
     <ka-add-contact ng-show="CC.showAddContactForm"></ka-add-contact>
+
+
   </ion-content>
 </ion-view>

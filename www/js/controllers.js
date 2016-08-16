@@ -32,16 +32,19 @@ angular.module('KitApp.controllers', [])
   vm.message = SignupService.message;
 }])
 
+
 .controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
   var vm = this;
+
+  vm.contacts = ContactService.contacts;
+
   vm.message = ContactService.message;
-  // vm.addContact = ContactService.addContact;
+
   vm.showAddContactForm = false;
 
   //Works
   vm.getContacts = function() {     $cordovaContacts.pickContact()
      .then(function(result) {         console.log(result);     }); }
-
 
 
 }])
@@ -56,6 +59,5 @@ angular.module('KitApp.controllers', [])
     console.log("connected to addContact function");
     console.log(name);
   };
-
-
+  
 }]);
