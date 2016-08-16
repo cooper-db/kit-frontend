@@ -1,5 +1,15 @@
+<!-- CC (ContactController) -->
+
 <ion-view>
   <ion-content class="padding">
+    <hr>
+    <hr>
+    <hr>
     <h1>{{CC.message}}</h1>
+    <div ng-repeat="contact in CC.contacts">
+        {{contact}}
+        <hr>
+    </div>
+
   </ion-content>
 </ion-view>

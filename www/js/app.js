@@ -23,6 +23,11 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
   });
 })
 
+//add authInterceptor to array
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
