@@ -34,6 +34,7 @@ angular.module('KitApp.controllers', [])
   vm.message = SignupService.message;
 }])
 
+
 .controller('ContactController', ['ContactService', function(ContactService) {
   var vm = this;
 
