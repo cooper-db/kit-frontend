@@ -4,6 +4,7 @@
 
     <!-- Jimmy's contact button -->
     <button class="button button-positive button-block" ng-click="CC.getNativeContact()"> Get Contact </button>
-    <button class="button button-positive button-block" ng-click="CC.getNativeContacts()"> Get Contact </button>
+    <button class="button button-positive button-block" ng-click="CC.showAddContactForm = !CC.showAddContactForm"> Add Contact </button>
+    <ka-add-contact ng-show="CC.showAddContactForm"></ka-add-contact>
   </ion-content>
 </ion-view>

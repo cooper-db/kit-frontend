@@ -34,16 +34,30 @@ angular.module('KitApp.controllers', [])
   vm.message = SignupService.message;
 }])
 
-.controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts) {
+.controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
   var vm = this;
   vm.message = ContactService.message;
+  // vm.addContact = ContactService.addContact;
+  vm.showAddContactForm = false;
 
   //Works
   vm.getContacts = function() {     $cordovaContacts.pickContact()
      .then(function(result) {         console.log(result);     }); }
 
-     //Doesn't Work
-  // vm.getNativeContact = ContactService.getNativeContact;
-  // vm.getNativeContacts = ContactService.getNativeContacts;
+
+
+}])
+
+.controller('AddContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
+  var vm = this;
+  vm.addContact = ContactService.addContact;
+
+
+
+  vm.addContact = function(name){
+    console.log("connected to addContact function");
+    console.log(name);
+  };
+
 
 }]);

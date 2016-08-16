@@ -25,4 +25,12 @@ angular.module('KitApp.directives', [])
     restrict: 'E',
     templateUrl: 'templates/contact-suggestion.html'
   };
+})
+.directive('kaAddContact', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'templates/create-contact.html',
+    controller: 'AddContactController',
+    controllerAs: 'ACC'
+  };
 });

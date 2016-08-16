@@ -41,18 +41,20 @@ angular.module('KitApp.services', [])
     });
   };
 
-  sv.getNativeContact = function() {
-    $cordovaContacts.pickContact()
-    .then(function(result) {
-      console.log(result);
-  });
-};
+//   sv.getNativeContact = function() {
+//     $cordovaContacts.pickContact()
+//     .then(function(result) {
+//       console.log(result);
+//   });
+// };
+//
+//   sv.getNativeContacts = function() {
+//      $cordovaContacts.find({multiple: true})
+//      .then(function(result) {
+//        console.log(result);
+//   });
+// };
 
-  sv.getNativeContacts = function() {
-     $cordovaContacts.find({multiple: true})
-     .then(function(result) {
-       console.log(result);
-  });
-};
+
 
 }]);
