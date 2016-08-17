@@ -5,45 +5,7 @@
     <h1 style="color:white;font-family:'Londrina Outline',cursive;">KiT</h1>
   </ion-nav-title>
   <ion-content class="padding contact">
-<<<<<<< HEAD
-    <!-- <hr>
-    <hr>
-    <hr> -->
-      <!-- <div ng-repeat="contact in CC.contacts.arr">
-        <p>{{contact.name}}</p>
-        <hr>
-    </div> -->
-
-    <!-- <a class="item item-icon-left item-icon-right" href="#">
-      <span class="icon ion-chatbubble-working"></span>
-      Call Ma
-      <span class="icon ion-ios-telephone-outline"></span>
-    </a> -->
-
-<ul class="list" ng-show="CC.loginView.show===false">
-  <div ng-repeat="contact in CC.contacts.arr">
-    <li class="item" ng-click="contact.showFormFunc()">
-        <h2>{{contact.name}}</h2>
-
-    <div ng-show="contact.showForm">
-      <p>
-        <span class="icon ion-ios-telephone-outline"></span> {{contact.phone}}</br>
-        <span class="icon ion-ios-email-outline"></span> {{contact.email}}</br>
-        <span class="icon ion-ios-body-outline"></span> {{contact.relationship}}</br>
-        <!-- {{contact.frequency_of_contact}}</br> -->
-        <span class="icon ion-ios-bookmarks-outline"></span> {{contact.notes}}</br>
-        <small>Last contacted on: {{contact.last_contact}}</small></br>
-        <span class="icon ion-edit"></span> Edit
-        <span ng-click="contact.deleteContact()"><span class="icon ion-trash-a"></span> Delete</span>
-      </p>
-    </div>
-    </li>
-  </div>
-</ul>
-
-
-=======
->>>>>>> contacts
+    
     <!-- Jimmy's contact button -->
     <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getNativeContact()" ng-disabled="CC.loginView.show"> Get Contact </button>
     <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>

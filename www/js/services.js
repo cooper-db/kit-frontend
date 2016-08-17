@@ -102,7 +102,7 @@ angular.module('KitApp.services', [])
             }
           };
 
-          sv.contacts.arr[i].deleteContact = function() {
+          sv.contacts.arr[i].deleteContact = function() {gi
             var thisContact = this;
             var contactId = this.id;
             //remove contact from sv.contacts.arr
