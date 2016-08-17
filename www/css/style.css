@@ -42,3 +42,10 @@ span.tab-title {
 span.default-title {
   color:white;
 }
+
+#create-contact-form input {
+  color: white;
+}
+#create-contact-form .input-label {
+  color: #983628;
+}
