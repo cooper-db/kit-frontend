@@ -1,62 +1,49 @@
-<form name="createContactForm" ng-submit="ACC.addContact(name, phone, email, relationship, freq, notes)">
-
+<form name="ACC.createContactForm">
   <label class="item item-input item-floating-label">
     <span class="input-label">Name</span>
-    <input type="text" placeholder="name" ng-model="name">
+    <input type="text" placeholder="name" ng-model="form.name">
   </label>
-  <!-- how insert formatting automatically with tel input? -->
   <label class="item item-input item-floating-label">
     <span class="input-label">Phone</span>
-    <input type="tel" placeholder="phone" ng-model="phone">
+    <input type="tel" placeholder="phone" ng-model="form.phone">
     <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
   </label>
 
   <label class="item item-input item-floating-label">
     <span class="input-label">Email</span>
-    <input type="email" placeholder="email" ng-model="email">
+    <input type="email" placeholder="email" ng-model="form.email">
   </label>
+  <div class="list">
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Choose a Relationship
+      </div>
+      <select name="relationship" ng-model="form.relationship">
+        <option ng-model="form.relationship" value="family">Family</option>
+        <option ng-model="form.relationship" value="social" selected>Social</option>
+        <option ng-model="form.relationship" value="professional">Professional</option>
+      </select>
+    </label>
+  </div>
 
-
-  <!-- <label> Relationship </label>
-    <input type="radio" name="relationship" ng-model="relationship" value="social" checked> Social
-    <input type="radio" name="relationship" ng-model="relationship" value="professional"> Professional<br> -->
-
-
-    <div class="list">
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Relationship
-        </div>
-        <select name="relationship" ng-model="relationship">
-          <option ng-model="relationship" value="family">family</option>
-          <option ng-model="relationship" value="social" selected>social</option>
-          <option ng-model="relationship" value="professional">professional</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="list">
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Frequency of Contact
-        </div>
-        <select name="freq" ng-model="freq">
-          <option ng-model="freq" value="7">weekly</option>
-          <option ng-model="freq" value="30" selected>monthly</option>
-          <option ng-model="freq" value="90">quarterly</option>
-        </select>
-      </label>
-    </div>
+  <div class="list">
+    <label class="item item-input item-select">
+      <div class="input-label">
+        How often should KiT remind you?
+      </div>
+      <select name="freq" ng-model="form.freq">
+        <option ng-model="form.freq" value="7">Weekly</option>
+        <option ng-model="form.freq" value="30" selected>Monthly</option>
+        <option ng-model="form.freq" value="90">Quarterly</option>
+      </select>
+    </label>
+  </div>
 
   <label class="item item-input item-floating-label">
     <span class="input-label">Notes</span>
-    <input type="text" placeholder="notes" ng-model="notes">
+    <input type="text" placeholder="notes" ng-model="form.notes">
   </label>
 
-<!-- buttons -->
-<!-- form needs to be set to untouched/pristine on close and add -->
   <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
-
-  <button type="submit" class="button button-stable button-block">Add</button>
-<!-- buttons -->
+  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" type="submit" class="button button-stable button-block">Add</button>
 </form>
