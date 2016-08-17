@@ -2,15 +2,19 @@
 
 angular.module('KitApp.controllers', [])
 
-.controller('HomeController', ['LoginService', function(LoginService) {
+.controller('HomeController', ['LoginService', 'ContactService', function(LoginService, ContactService) {
 
   var vm = this;
 
   vm.loginView = LoginService.loginView;
 
+  vm.contacts = ContactService.contacts;
+
+  console.log(vm.contacts);
+
 }])
 
-.controller('AccountController', ['LoginService', '$location', '$window', function(LoginService, $location, $window) {
+.controller('AccountController', ['LoginService', 'SignupService', '$location', '$window', function(LoginService, SignupService, $location, $window) {
 
   var vm = this;
 
@@ -24,14 +28,12 @@ angular.module('KitApp.controllers', [])
     LoginService.logout();
   };
 
+  vm.signup = function(user) {
+    SignupService.signup(user);
+    vm.loginView.show = false;
+  };
 
 }])
-
-.controller('SignupController', ['SignupService', function(SignupService) {
-  var vm = this;
-  vm.message = SignupService.message;
-}])
-
 
 .controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
   var vm = this;
@@ -53,11 +55,9 @@ angular.module('KitApp.controllers', [])
   var vm = this;
   vm.addContact = ContactService.addContact;
 
-
-
   vm.addContact = function(name){
     console.log("connected to addContact function");
     console.log(name);
   };
-  
+
 }]);

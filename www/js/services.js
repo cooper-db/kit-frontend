@@ -2,11 +2,14 @@
 
 angular.module('KitApp.services', [])
 
-.service('LoginService', ['$http', '$window', 'ContactService', function($http, $window, ContactService) {
+.service('LoginService', ['$http', '$location', '$window', 'ContactService', function($http, $location, $window, ContactService) {
   var vm = this;
 
-  vm.loginView = {show:true};
-  vm.message = 'login';
+  if ($window.sessionStorage.token) {
+    vm.loginView = {show:false};
+  } else {
+    vm.loginView = {show:true};
+  }
 
   vm.getContacts = ContactService.getContacts;
 
@@ -19,6 +22,7 @@ angular.module('KitApp.services', [])
       $window.sessionStorage.token = response.data.token;
       vm.loginView.show = false;
       $window.sessionStorage.id = response.data.id;
+      $location.path('/tab/home');
     })
     .catch(function(err) {
       console.log(err);
@@ -35,10 +39,21 @@ angular.module('KitApp.services', [])
 
 }])
 
-.service('SignupService', function() {
+.service('SignupService', ['$http', '$location', '$window', function($http, $location, $window) {
   var vm = this;
-  vm.message = 'hello';
-})
+  vm.signup = function(user) {
+    $http.post('http://localhost:3000/auth/signup', {username: user.username, password: user.password})
+    .then(function(response){
+      console.log(response);
+      $window.sessionStorage.token = response.data.token;
+      $window.sessionStorage.id = response.data.id;
+      $location.path('/tab/home');
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
+}])
 
 .service('ContactService', ['$http', '$window', '$cordovaContacts', function($http, $window, $cordovaContacts) {
   var sv = this;
@@ -58,6 +73,20 @@ angular.module('KitApp.services', [])
       console.log('getContacts ERR:', err);
     });
   //};
+
+  sv.addContact = function(name, phone, email, notes){
+    var id = $window.sessionStorage.id;
+    console.log(name, phone, email, notes);
+    $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, notes:notes})
+    .then(function(response){
+      console.log('successfully posted a new contact');
+      console.log(response.data);
+    })
+    .catch(function(err){
+      console.log('posting new contact didn\'t work');
+      console.log(err);
+    });
+  };
 
 }])
 
