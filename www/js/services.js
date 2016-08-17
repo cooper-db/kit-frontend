@@ -74,10 +74,10 @@ angular.module('KitApp.services', [])
     });
   //};
 
-  sv.addContact = function(name, phone, email, notes){
+  sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
-    console.log(name, phone, email, notes);
-    $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, notes:notes})
+    console.log(name, phone, email, relationship, freq, notes);
+    $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, freq:freq, notes:notes})
     .then(function(response){
       console.log('successfully posted a new contact');
       console.log(response.data);
