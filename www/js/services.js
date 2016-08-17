@@ -59,6 +59,7 @@ angular.module('KitApp.services', [])
   var sv = this;
 
   sv.contacts = {};
+  sv.addContactForm =   {};
 
   //sv.getContacts = function(id) {
     var id = $window.sessionStorage.id;
@@ -74,18 +75,18 @@ angular.module('KitApp.services', [])
     });
   //};
 
-  sv.addContact = function(name, phone, email, relationship, freq, notes){
+  sv.addContact = function(form){
     var id = $window.sessionStorage.id;
-    console.log(name, phone, email, relationship, freq, notes);
-    $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
-    .then(function(response){
-      console.log('successfully posted a new contact');
-      console.log(response.data);
-    })
-    .catch(function(err){
-      console.log('posting new contact didn\'t work');
-      console.log(err);
-    });
+    console.log(form);
+  //   $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
+  //   .then(function(response){
+  //     console.log('successfully posted a new contact');
+  //     console.log(response.data);
+  //   })
+  //   .catch(function(err){
+  //     console.log('posting new contact didn\'t work');
+  //     console.log(err);
+  //   });
   };
 
 }])
