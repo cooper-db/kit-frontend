@@ -1,3 +1,4 @@
+<form name="createContactForm" ng-submit="ACC.addContact(name, phone, email, relationship, freq, notes)">
 
   <label class="item item-input item-floating-label">
     <span class="input-label">Name</span>
@@ -7,6 +8,7 @@
   <label class="item item-input item-floating-label">
     <span class="input-label">Phone</span>
     <input type="tel" placeholder="phone" ng-model="phone">
+    <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
   </label>
 
   <label class="item item-input item-floating-label">
@@ -15,17 +17,36 @@
   </label>
 
 
-<!-- special -->
-  <!-- <label class="item item-input item-floating-label">
-    <span class="input-label">Relationship</span>
-    <input ng-model="relationship">
-  </label>
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Contact Frequency</span>
-    <input ng-model="freq">
-  </label> -->
-<!-- special -->
+  <!-- <label> Relationship </label>
+    <input type="radio" name="relationship" ng-model="relationship" value="social" checked> Social
+    <input type="radio" name="relationship" ng-model="relationship" value="professional"> Professional<br> -->
 
+
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Relationship
+        </div>
+        <select name="relationship" ng-model="relationship">
+          <option ng-model="relationship" value="family">family</option>
+          <option ng-model="relationship" value="social" selected>social</option>
+          <option ng-model="relationship" value="professional">professional</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Frequency of Contact
+        </div>
+        <select name="freq" ng-model="freq">
+          <option ng-model="freq" value="7">weekly</option>
+          <option ng-model="freq" value="30" selected>monthly</option>
+          <option ng-model="freq" value="90">quarterly</option>
+        </select>
+      </label>
+    </div>
 
   <label class="item item-input item-floating-label">
     <span class="input-label">Notes</span>
@@ -36,5 +57,6 @@
 <!-- form needs to be set to untouched/pristine on close and add -->
   <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
 
-  <button ng-click="ACC.addContact(name, phone, email, notes)" class="button button-stable button-block">Add</button>
+  <button type="submit" class="button button-stable button-block">Add</button>
 <!-- buttons -->
+</form>

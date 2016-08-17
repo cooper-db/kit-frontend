@@ -1,4 +1,3 @@
-# kit-frontend
 #install npm dependencies
 
 ```bash
@@ -50,18 +49,3 @@ ionic run android
 ##ios
 
 - safari > preferences > dev menu checkbox > develop on toolbar > simulator
-
-
-
-##Installing plugin
-- bower install ngCordova --save-dev
-- cordova plugin add cordova-plugin-contacts
-- put in index.html
-    ```<script src="lib/ng-cordova/dist/ng-cordova.js"></script>```
-- in app.js file add
-   ```document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-      console.log("Hello from Device Ready");
-    console.log(navigator.contacts);
-    }```
-- ```<button class="button button-positive button-block" ng-click="getContact()"> Get Contact </button>```
