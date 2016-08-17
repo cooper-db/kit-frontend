@@ -80,13 +80,13 @@ angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'Kit
     }
   })
 
-  .state('tab.home-signup', {
+  .state('tab.account-signup', {
     url: '/account/signup',
     views: {
       'tab-account': {
         templateUrl: 'templates/account-signup.html',
-        controller: 'SignupController',
-        controllerAs: 'SC'
+        controller: 'AccountController',
+        controllerAs: 'AC'
       }
     }
   });

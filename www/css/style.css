@@ -1,5 +1,5 @@
 /* Empty. Add your own CSS if you like */
-.home {
+.home, .account, .contact {
   background-color: #581908;
 }
 
@@ -36,5 +36,9 @@ i {
 }
 
 span.tab-title {
+  color:white;
+}
+
+span.default-title {
   color:white;
 }
