@@ -60,16 +60,15 @@ angular.module('KitApp.services', [])
 
   sv.contacts = {};
 
-  //sv.getContacts = function(id) {
-    var id = $window.sessionStorage.id;
-     $http.get('http://localhost:3000/users/' + id + '/contacts')
+  var id = $window.sessionStorage.id;
+   $http.get('http://localhost:3000/users/' + id + '/contacts')
     .then(function(response) {
       console.log('getContacts response: ', response.data);
       sv.contacts.arr = response.data;
       sv.contacts.length = response.data.length;
+      //add showFormFunc method to
       for (var i = 0; i < sv.contacts.arr.length; i++) {
         sv.contacts.arr[i].showForm = false;
-        // console.log(sv.contacts.arr[i].showForm);
         sv.contacts.arr[i].showFormFunc = function() {
           if(this.showForm === true) {
             return this.showForm = false;
@@ -77,13 +76,25 @@ angular.module('KitApp.services', [])
             return this.showForm = true;
           }
         };
+        sv.contacts.arr[i].deleteContact = function() {
+          var thisContact = this;
+          console.log(thisContact);
+          var contactId = this.id;
+          $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+          .then(function(response) {
+            console.log(thisContact);
+            console.log(response);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        };
       }
-      // return response.data;
     })
     .catch(function(err) {
       console.log('getContacts ERR:', err);
     });
-  //};
+
 
   sv.addContact = function(name, phone, email, notes){
     var id = $window.sessionStorage.id;
@@ -99,21 +110,13 @@ angular.module('KitApp.services', [])
     });
   };
 
-  // sv.showInfo = function() {
-  //   //get into array of contacts
-  //   for (var i = 0; i < sv.contacts.arr.length; i++) {
+  // sv.deleteContact = function() {
+  //   var contactId = this.id;
+  //   $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+  //   .then(function(response) {
   //
-  //     sv.contacts.arr[i].showForm = false;
-  //     console.log(sv.contacts.arr[i].showForm);
-  //     sv.contacts.arr[i].showFormFunc = function() {
-  //       if(this.showForm === true) {
-  //         return this.showForm = false;
-  //       } else if(this.showForm === false) {
-  //         return this.showForm = true;
-  //       }
-  //     };
-  //   }
-
+  //   });
+  // };
 
 }])
 

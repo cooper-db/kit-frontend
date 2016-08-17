@@ -19,20 +19,20 @@
 <ul class="list">
   <div ng-repeat="contact in CC.contacts.arr">
     <li class="item" ng-click="contact.showFormFunc()">
-        {{contact.name}}
+        <h2>{{contact.name}}</h2>
 
-
-      <p ng-show="contact.showForm">
+    <div ng-show="contact.showForm">
+      <p>
         <span class="icon ion-ios-telephone-outline"></span> {{contact.phone}}</br>
         <span class="icon ion-ios-email-outline"></span> {{contact.email}}</br>
         <span class="icon ion-ios-body-outline"></span> {{contact.relationship}}</br>
         <!-- {{contact.frequency_of_contact}}</br> -->
         <span class="icon ion-ios-bookmarks-outline"></span> {{contact.notes}}</br>
-        <small>Last contacted on: {{contact.last_contact}}</small>
+        <small>Last contacted on: {{contact.last_contact}}</small></br>
+        <span class="icon ion-edit"></span> Edit
+        <span ng-click="contact.deleteContact()"><span class="icon ion-trash-a"></span> Delete</span>
       </p>
-
-      <!-- <span class="icon ion-edit"></span> -->
-      <!-- <span class="icon ion-trash-a"></span> -->
+    </div>
     </li>
   </div>
 </ul>
