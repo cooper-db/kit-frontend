@@ -88,15 +88,6 @@ angular.module('KitApp.services', [])
     });
   };
 
-  sv.phoneParser = function (phone) {
-      if (phone.length < 10) {
-          console.error('Too Few Digits');
-          return;
-      } else if (phone.length > 10){
-          phone = phone.split('');
-      }
-  };
-
 }])
 
 .service('authInterceptor', ['$q', '$window', function($q, $window) {
