@@ -13,16 +13,15 @@
     <span class="input-label">Email</span>
     <input type="email" placeholder="email" ng-model="form.email">
   </label>
-
   <div class="list">
     <label class="item item-input item-select">
       <div class="input-label">
-        Relationship
+        Choose a Relationship
       </div>
       <select name="relationship" ng-model="form.relationship">
-        <option ng-model="form.relationship" value="family">family</option>
-        <option ng-model="form.relationship" value="social" selected>social</option>
-        <option ng-model="form.relationship" value="professional">professional</option>
+        <option ng-model="form.relationship" value="family">Family</option>
+        <option ng-model="form.relationship" value="social" selected>Social</option>
+        <option ng-model="form.relationship" value="professional">Professional</option>
       </select>
     </label>
   </div>
@@ -30,12 +29,12 @@
   <div class="list">
     <label class="item item-input item-select">
       <div class="input-label">
-        Frequency of Contact
+        How often should KiT remind you?
       </div>
       <select name="freq" ng-model="form.freq">
-        <option ng-model="form.freq" value="7">weekly</option>
-        <option ng-model="form.freq" value="30" selected>monthly</option>
-        <option ng-model="form.freq" value="90">quarterly</option>
+        <option ng-model="form.freq" value="7">Weekly</option>
+        <option ng-model="form.freq" value="30" selected>Monthly</option>
+        <option ng-model="form.freq" value="90">Quarterly</option>
       </select>
     </label>
   </div>
