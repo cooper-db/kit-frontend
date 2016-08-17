@@ -51,7 +51,6 @@ angular.module('KitApp.controllers', [])
 
        if(isIOS == true){
          alert(Object.keys(result));
-        //  alert(result.displayName); //This is null in IOS
         //  alert(result.name.givenName);
         //  alert(result.name.familyName);
          alert(result.name.formatted); // USE THIS FOR SIMPLICITY
@@ -60,7 +59,7 @@ angular.module('KitApp.controllers', [])
          alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
          alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
          alert(Object.keys(result));
-         
+
        } else {
          // result // this is an object
           alert(Object.keys(result));
@@ -73,21 +72,10 @@ angular.module('KitApp.controllers', [])
           alert(JSON.stringify(result.phoneNumbers[0])); //This is an array // [object, Object]
           alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
           alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
-         //  alert(result.addressess); //undefined
-         //  alert(result.ims); // null
-         //  alert(result.organizations); //null
-         //  alert(result.birthday); // invalid date
-         //  alert(result.note);
-         //  alert(result.photos);
-         //  alert(result.categories);
-         //  alert(result.urls);
-         //  alert(result[0]);
-         //  alert(typeof result);
-         //  alert(typeof result[0]);
-         //  console.log(result);
+
        }
 
-
+       
 
      });
    };
