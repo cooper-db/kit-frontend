@@ -22,6 +22,7 @@ angular.module('KitApp.services', [])
       $window.sessionStorage.token = response.data.token;
       vm.loginView.show = false;
       $window.sessionStorage.id = response.data.id;
+      ContactService.getContacts();
       $location.path('/tab/home');
     })
     .catch(function(err) {
@@ -55,24 +56,54 @@ angular.module('KitApp.services', [])
   };
 }])
 
-.service('ContactService', ['$http', '$window', '$cordovaContacts', function($http, $window, $cordovaContacts) {
+.service('ContactService', ['$http', '$ionicPopup', '$window', '$cordovaContacts', function($http, $ionicPopup, $window, $cordovaContacts) {
   var sv = this;
 
   sv.contacts = {};
 
-  //sv.getContacts = function(id) {
+  sv.getContacts = function(id) {
     var id = $window.sessionStorage.id;
-     $http.get('http://localhost:3000/users/' + id + '/contacts')
-    .then(function(response) {
-      console.log('getContacts response: ', response.data);
-      sv.contacts.arr = response.data;
-      sv.contacts.length = response.data.length;
-      // return response.data;
-    })
-    .catch(function(err) {
-      console.log('getContacts ERR:', err);
-    });
-  //};
+    $http.get('http://localhost:3000/users/' + id + '/contacts')
+      .then(function(response) {
+        console.log('getContacts response: ', response.data);
+        sv.contacts.arr = response.data;
+        sv.contacts.length = response.data.length;
+        sv.contacts.getRandomContact = function(input) {
+          input = this.arr;
+          var randInt = Math.floor(Math.random() * (input.length));
+          // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
+          // var freq = input[randInt].frequency_of_contact * 86164;
+          // var now = Date.now() / 1000;
+          // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
+          this.randomContact = input[randInt];
+        };
+        sv.contacts.getRandomContact();
+        sv.contacts.updateLastContact = function() {
+          this.randomContact.last_contact =  new Date();
+          $http.put('http://localhost:3000/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+          this.randomContact.contacted = true;
+          sv.contacts.showAlert();
+        };
+        sv.contacts.showAlert = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Nice!',
+            template: 'Feel free to stop for the day, or keep going!'
+          });
+          alertPopup.then(function(res) {
+            console.log(res);
+          });
+        };
+      })
+      .catch(function(err) {
+        console.log('getContacts ERR:', err);
+      });
+  };
 
   sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
