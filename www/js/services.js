@@ -51,8 +51,8 @@ angular.module('KitApp.services', [])
 
   vm.logout = function() {
     delete $window.sessionStorage.token;
-    vm.loginView.show = true;
     delete $window.sessionStorage.id;
+    vm.loginView.show = true;
   };
 
 }])
@@ -73,14 +73,14 @@ angular.module('KitApp.services', [])
   };
 }])
 
-.service('ContactService', ['$http', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
+.service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
   var sv = this;
 
   sv.contacts = {};
   sv.addContactForm =   {};
 
   sv.getContacts = function(id) {
-     id = $window.sessionStorage.id;
+    id = $window.sessionStorage.id;
     $http.get(routeToAPI.url + '/users/' + id + '/contacts')
       .then(function(response) {
 
@@ -92,20 +92,22 @@ angular.module('KitApp.services', [])
 
         //add showFormFunc method
         for (var i = 0; i < sv.contacts.arr.length; i++) {
+          console.log(sv.contacts.arr[i]);
 
           sv.contacts.arr[i].showForm = false;
           sv.contacts.arr[i].showFormFunc = function() {
             if(this.showForm === true) {
-              return this.showForm = false;
+              this.showForm = false;
             } else if(this.showForm === false) {
-              return this.showForm = true;
+              this.showForm = true;
             }
           };
 
-          sv.contacts.arr[i].deleteContact = function() {
+          sv.contacts.arr[i].deleteContact = function() {gi
             var thisContact = this;
-            console.log(thisContact);
             var contactId = this.id;
+            //remove contact from sv.contacts.arr
+            sv.contacts.arr.splice(sv.contacts.arr.indexOf(thisContact));
             $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
             .then(function(response) {
               console.log(thisContact);
@@ -116,10 +118,25 @@ angular.module('KitApp.services', [])
             });
           };
 
+          //editContact function shows the form
+            sv.contacts.arr[i].showEditForm = false;
+            sv.contacts.arr[i].showEditFormFunc = function() {
+              console.log('this is the edit form func');
+              if(this.showEditForm === true) {
+                this.showEditForm = false;
+                // this.showForm = true;
+              } else {
+                // this.showForm = false;
+                this.showEditForm = true;
+              }
+            };
+
+
         }
 
-        sv.contacts.getRandomContact = function(input) {
-          input = this.arr;
+        sv.contacts.getRandomContact = function() {
+          $state.reload();
+          var input = this.arr;
           var randInt = Math.floor(Math.random() * (input.length));
           // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
           // var freq = input[randInt].frequency_of_contact * 86164;
@@ -132,10 +149,8 @@ angular.module('KitApp.services', [])
 
         sv.contacts.updateLastContact = function() {
           this.randomContact.last_contact =  new Date();
-          $http.put(routeToAPI + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
-          .then(function(response) {
-            console.log(response);
-            this.randomContact.contacted = true;
+          $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
+          .then(function() {
             sv.contacts.showAlert();
           })
           .catch(function(err) {
@@ -156,7 +171,9 @@ angular.module('KitApp.services', [])
       .catch(function(err) {
         console.log('getContacts ERR:', err);
       });
-    };
+
+  };
+
 
   sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
@@ -171,15 +188,6 @@ angular.module('KitApp.services', [])
       console.log(err);
     });
   };
-
-  // sv.deleteContact = function() {
-  //   var contactId = this.id;
-  //   $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
-  //   .then(function(response) {
-  //
-  //   });
-  // };
-
 }])
 
 .service('authInterceptor', ['$q', '$window', function($q, $window) {

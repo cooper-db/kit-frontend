@@ -33,10 +33,12 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
+.controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', function(ContactService, LoginService, $cordovaContacts ) {
   var vm = this;
 
   vm.contacts = ContactService.contacts;
+
+  vm.loginView = LoginService.loginView;
 
   vm.message = ContactService.message;
 

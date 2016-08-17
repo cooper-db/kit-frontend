@@ -8,7 +8,7 @@
 // 'starter.controllers' is found in controllers.js
 
 
-angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'KitApp.directives', 'ngCordova'])
+angular.module('KitApp', ['ionic', 'KitApp.controllers', 'KitApp.services', 'KitApp.directives', 'ngCordova', 'angularMoment'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
