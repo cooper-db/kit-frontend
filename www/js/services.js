@@ -72,7 +72,7 @@ angular.module('KitApp.services', [])
 
         sv.contacts.length = response.data.length;
 
-        //add showFormFunc method to
+        //add showFormFunc method
         for (var i = 0; i < sv.contacts.arr.length; i++) {
 
           sv.contacts.arr[i].showForm = false;
