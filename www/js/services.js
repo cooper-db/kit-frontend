@@ -75,20 +75,22 @@ angular.module('KitApp.services', [])
 
         //add showFormFunc method
         for (var i = 0; i < sv.contacts.arr.length; i++) {
+          console.log(sv.contacts.arr[i]);
 
           sv.contacts.arr[i].showForm = false;
           sv.contacts.arr[i].showFormFunc = function() {
             if(this.showForm === true) {
-              return this.showForm = false;
+              this.showForm = false;
             } else if(this.showForm === false) {
-              return this.showForm = true;
+              this.showForm = true;
             }
           };
 
           sv.contacts.arr[i].deleteContact = function() {
             var thisContact = this;
-            console.log(thisContact);
             var contactId = this.id;
+            //remove contact from sv.contacts.arr
+            sv.contacts.arr.splice(sv.contacts.arr.indexOf(thisContact));
             $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
             .then(function(response) {
               console.log(thisContact);
@@ -98,6 +100,20 @@ angular.module('KitApp.services', [])
               console.log(err);
             });
           };
+
+          //editContact function shows the form
+            sv.contacts.arr[i].showEditForm = false;
+            sv.contacts.arr[i].showEditFormFunc = function() {
+              console.log('this is the edit form func');
+              if(this.showEditForm === true) {
+                this.showEditForm = false;
+                // this.showForm = true;
+              } else {
+                // this.showForm = false;
+                this.showEditForm = true;
+              }
+            };
+
 
         }
 
@@ -152,14 +168,7 @@ angular.module('KitApp.services', [])
       console.log('posting new contact didn\'t work');
       console.log(err);
     });
-  };
-
-  // sv.deleteContact = function() {
-  //   var contactId = this.id;
-  //   $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
-  //   .then(function(response) {
-  //
-  //   });
+   };
   };
 
 }])
