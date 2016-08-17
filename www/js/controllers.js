@@ -10,8 +10,6 @@ angular.module('KitApp.controllers', [])
 
   vm.contacts = ContactService.contacts;
 
-  console.log(vm.contacts);
-
 }])
 
 .controller('AccountController', ['LoginService', 'SignupService', '$location', '$window', function(LoginService, SignupService, $location, $window) {
@@ -60,7 +58,7 @@ angular.module('KitApp.controllers', [])
          alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
          alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
          alert(Object.keys(result));
-         
+
        } else {
          // result // this is an object
           alert(Object.keys(result));

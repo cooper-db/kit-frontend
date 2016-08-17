@@ -61,13 +61,35 @@ angular.module('KitApp.services', [])
   sv.contacts = {};
 
   //sv.getContacts = function(id) {
-    var id = $window.sessionStorage.id;
-     $http.get('http://localhost:3000/users/' + id + '/contacts')
+  var id = $window.sessionStorage.id;
+  $http.get('http://localhost:3000/users/' + id + '/contacts')
     .then(function(response) {
       console.log('getContacts response: ', response.data);
       sv.contacts.arr = response.data;
       sv.contacts.length = response.data.length;
-      // return response.data;
+      sv.contacts.getRandomContact = function(input) {
+        input = this.arr;
+        var randInt = Math.floor(Math.random() * (input.length - 1));
+        // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
+        // var freq = input[randInt].frequency_of_contact * 86164;
+        // var now = Date.now() / 1000;
+        // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
+        this.randomContact = input[randInt];
+      };
+
+      sv.contacts.getRandomContact();
+
+      sv.contacts.updateLastContact = function() {
+        this.randomContact.last_contact =  new Date();
+        $http.put('http://localhost:3000/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      };
+
     })
     .catch(function(err) {
       console.log('getContacts ERR:', err);

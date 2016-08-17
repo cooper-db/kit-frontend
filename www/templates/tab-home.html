@@ -8,16 +8,18 @@
     </div>
     <div ng-show="HC.loginView.show===false">
       <h2 style="text-align:center;color:white">Let's get in touch with . . .</h2>
-      <h1 style="text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:7em">John Doe</h1>
+      <h1 style="text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:7em">{{HC.contacts.randomContact.name}}</h1>
       <h1 style="text-align:center;color:white">Today!</h1>
       <hr>
-      <h3 style="text-align:center;color:white">(970) 555-5555</h3>
-      <h3 style="text-align:center;color:white">email@exampleemail.com</h3>
+      <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.phone}}</h3>
+      <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.email}}</h3>
       <hr>
-      <button class="button button-block button-stable button-large">Did it!</button>
-      <button class="button button-block button-stable button-large">Another</button>
+      <h3 style="text-align:center;color:white">Notes:</h3>
+      <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.notes}}</h3>
       <hr>
-      {{HC.contacts}}
+      <button class="button button-block button-stable button-large" ng-click="HC.contacts.updateLastContact()">Did it!</button>
+      <button class="button button-block button-stable button-large" ng-click="HC.contacts.getRandomContact()">Another</button>
+      <hr>
     </div>
     <ka-contact-suggestion></ka-contact-suggestion>
   </ion-content>
