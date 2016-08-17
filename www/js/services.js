@@ -70,7 +70,7 @@ angular.module('KitApp.services', [])
         sv.contacts.length = response.data.length;
         sv.contacts.getRandomContact = function(input) {
           input = this.arr;
-          var randInt = Math.floor(Math.random() * (input.length - 1));
+          var randInt = Math.floor(Math.random() * (input.length));
           // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
           // var freq = input[randInt].frequency_of_contact * 86164;
           // var now = Date.now() / 1000;
