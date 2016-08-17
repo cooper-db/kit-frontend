@@ -19,7 +19,7 @@
       <span class="icon ion-ios-telephone-outline"></span>
     </a> -->
 
-<ul class="list">
+<ul class="list" ng-show="CC.loginView.show===false">
   <div ng-repeat="contact in CC.contacts.arr">
     <li class="item" ng-click="contact.showFormFunc()">
         <h2>{{contact.name}}</h2>
@@ -42,8 +42,8 @@
 
 
     <!-- Jimmy's contact button -->
-    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getNativeContact()"> Get Contact </button>
-    <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm"> Add Contact </button>
+    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getNativeContact()" ng-disabled="CC.loginView.show"> Get Contact </button>
+    <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>
     <ka-add-contact ng-show="CC.showAddContactForm"></ka-add-contact>
 
 
