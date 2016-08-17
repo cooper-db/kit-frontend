@@ -90,6 +90,20 @@ angular.module('KitApp.controllers', [])
      });
    };
 
+  
+  // vm.contacts.arr[i].showForm = false;
+
+
+
+  // vm.showForm = false;
+  //
+  // vm.showInfo = function() {
+  //   if(!vm.showForm) {
+  //     vm.showForm = true;
+  //   } else {
+  //     vm.showForm = false;
+  //   }
+  // }
 
 }])
 

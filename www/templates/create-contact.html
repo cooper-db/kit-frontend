@@ -1,13 +1,11 @@
-<!-- <form name="ACC.createContactForm" ng-submit="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes)"> -->
-<form name="ACC.createContactForm">
+<form name="ACC.createContactForm" id="create-contact-form" novalidate>
   <label class="item item-input item-floating-label">
     <span class="input-label">Name</span>
-    <input type="text" placeholder="name" ng-model="form.name">
+    <input type="text" placeholder="name" ng-model="form.name" required>
   </label>
-  <!-- how insert formatting automatically with tel input? -->
   <label class="item item-input item-floating-label">
     <span class="input-label">Phone</span>
-    <input type="tel" placeholder="phone" ng-model="form.phone">
+    <input type="tel" placeholder="phone" ng-model="form.phone" ng-minlength="10" required>
     <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
   </label>
 
@@ -50,5 +48,5 @@
   </label>
 
   <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
-  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" type="submit" class="button button-stable button-block">Add</button>
+  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" type="submit" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
 </form>

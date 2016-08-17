@@ -79,12 +79,44 @@ angular.module('KitApp.services', [])
   sv.addContactForm =   {};
 
   sv.getContacts = function(id) {
-    var id = $window.sessionStorage.id;
+     id = $window.sessionStorage.id;
     $http.get(routeToAPI.url + '/users/' + id + '/contacts')
       .then(function(response) {
+
         console.log('getContacts response: ', response.data);
+
         sv.contacts.arr = response.data;
+
         sv.contacts.length = response.data.length;
+
+        //add showFormFunc method
+        for (var i = 0; i < sv.contacts.arr.length; i++) {
+
+          sv.contacts.arr[i].showForm = false;
+          sv.contacts.arr[i].showFormFunc = function() {
+            if(this.showForm === true) {
+              return this.showForm = false;
+            } else if(this.showForm === false) {
+              return this.showForm = true;
+            }
+          };
+
+          sv.contacts.arr[i].deleteContact = function() {
+            var thisContact = this;
+            console.log(thisContact);
+            var contactId = this.id;
+            $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+            .then(function(response) {
+              console.log(thisContact);
+              console.log(response);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+          };
+
+        }
+
         sv.contacts.getRandomContact = function(input) {
           input = this.arr;
           var randInt = Math.floor(Math.random() * (input.length));
@@ -94,19 +126,22 @@ angular.module('KitApp.services', [])
           // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
           this.randomContact = input[randInt];
         };
+
         sv.contacts.getRandomContact();
+
         sv.contacts.updateLastContact = function() {
           this.randomContact.last_contact =  new Date();
           $http.put(routeToAPI + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
           .then(function(response) {
             console.log(response);
+            this.randomContact.contacted = true;
+            sv.contacts.showAlert();
           })
           .catch(function(err) {
             console.log(err);
           });
-          this.randomContact.contacted = true;
-          sv.contacts.showAlert();
         };
+
         sv.contacts.showAlert = function() {
           var alertPopup = $ionicPopup.alert({
             title: 'Nice!',
@@ -120,7 +155,7 @@ angular.module('KitApp.services', [])
       .catch(function(err) {
         console.log('getContacts ERR:', err);
       });
-  };
+
 
   sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
@@ -134,6 +169,14 @@ angular.module('KitApp.services', [])
       console.log('posting new contact didn\'t work');
       console.log(err);
     });
+  };
+
+  // sv.deleteContact = function() {
+  //   var contactId = this.id;
+  //   $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+  //   .then(function(response) {
+  //
+  //   });
   };
 
 }])
