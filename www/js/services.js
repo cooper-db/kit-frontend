@@ -103,7 +103,7 @@ angular.module('KitApp.services', [])
             }
           };
 
-          sv.contacts.arr[i].deleteContact = function() {gi
+          sv.contacts.arr[i].deleteContact = function() {
             var thisContact = this;
             var contactId = this.id;
             //remove contact from sv.contacts.arr
@@ -121,7 +121,6 @@ angular.module('KitApp.services', [])
           //editContact function shows the form
             sv.contacts.arr[i].showEditForm = false;
             sv.contacts.arr[i].showEditFormFunc = function() {
-              console.log('this is the edit form func');
               if(this.showEditForm === true) {
                 this.showEditForm = false;
                 // this.showForm = true;
