@@ -49,3 +49,9 @@ ionic run android
 ##ios
 
 - safari > preferences > dev menu checkbox > develop on toolbar > simulator
+
+
+##pushPlugin
+- ```bash
+  ionic plugin add phonegap-plugin-push --variable SENDER_ID="jimmyMac"
+  ```
