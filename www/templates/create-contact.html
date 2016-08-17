@@ -1,39 +1,40 @@
-<ion-view>
-  <ion-content>
-    <div class="card padding">
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Name</span>
-        <input type="text" placeholder="name">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Phone</span>
-        <input type="text" placeholder="phone">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Email</span>
-        <input type="text" placeholder="Username">
-      </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Name</span>
+    <input type="text" placeholder="name" ng-model="name">
+  </label>
+  <!-- how insert formatting automatically with tel input? -->
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Phone</span>
+    <input type="tel" placeholder="phone" ng-model="phone">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Email</span>
+    <input type="email" placeholder="email" ng-model="email">
+  </label>
 
 
+<!-- special -->
+  <!-- <label class="item item-input item-floating-label">
+    <span class="input-label">Relationship</span>
+    <input ng-model="relationship">
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Contact Frequency</span>
+    <input ng-model="freq">
+  </label> -->
+<!-- special -->
 
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Relationship</span>
-        <input type="text" placeholder="relationship">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Contact Frequency</span>
-        <input type="text" placeholder="freq">
-      </label>
 
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Notes</span>
+    <input type="text" placeholder="notes" ng-model="notes">
+  </label>
 
+<!-- buttons -->
+<!-- form needs to be set to untouched/pristine on close and add -->
+  <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
 
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Notes</span>
-        <input type="text" placeholder="notes">
-      </label> -->
-
-      <button ng-click="" class="button button-stable button-block">Close</button>
-      <button ng-click="CC.addContact(name)" class="button button-stable button-block">Add</button>
-    </div>
-  </ion-content>
-</ion-view>
+  <button ng-click="ACC.addContact(name, phone, email, notes)" class="button button-stable button-block">Add</button>
+<!-- buttons -->

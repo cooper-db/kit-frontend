@@ -59,6 +59,11 @@ angular.module('KitApp.services', [])
     });
   //};
 
+  sv.addContact = function(name, phone, email, notes){
+    console.log("connected to addContact function");
+    console.log(name, phone, email, notes);
+  };
+
 }])
 
 .service('authInterceptor', ['$q', '$window', function($q, $window) {
