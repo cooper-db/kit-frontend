@@ -60,7 +60,7 @@ angular.module('KitApp.controllers', [])
          alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
          alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
          alert(Object.keys(result));
-         
+
        } else {
          // result // this is an object
           alert(Object.keys(result));
@@ -99,9 +99,6 @@ angular.module('KitApp.controllers', [])
   var vm = this;
   vm.addContact = ContactService.addContact;
 
-  vm.addContact = function(name){
-    console.log("connected to addContact function");
-    console.log(name);
-  };
+
 
 }]);
