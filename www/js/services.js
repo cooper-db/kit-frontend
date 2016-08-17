@@ -7,15 +7,15 @@ angular.module('KitApp.services', [])
 
 //commment IN to hit LIVE HEROKU HOSTED DATABASE!
 //p.s. - you'll need to comment out the constant BELOW this one too!
-.constant("routeToAPI", {
-        "url": "https://keep-intouch.herokuapp.com",
-    })
+// .constant("routeToAPI", {
+//         "url": "https://keep-intouch.herokuapp.com",
+//     })
 
 // //comment IN to hit LOCALLY HOSTED DATABASE!
 // //p.s. - you'll need to comment out the constant ABOVE this one too!
-// .constant("routeToAPI", {
-//         "url": "http://localhost:3000",
-//     });
+.constant("routeToAPI", {
+        "url": "http://localhost:3000",
+    })
 //-----------------------------------------------------------------------------
 
 .service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
@@ -72,14 +72,14 @@ angular.module('KitApp.services', [])
   };
 }])
 
-.service('ContactService', ['$http', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
+.service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
   var sv = this;
 
   sv.contacts = {};
   sv.addContactForm =   {};
 
   sv.getContacts = function(id) {
-     id = $window.sessionStorage.id;
+    id = $window.sessionStorage.id;
     $http.get(routeToAPI.url + '/users/' + id + '/contacts')
       .then(function(response) {
 
@@ -95,9 +95,9 @@ angular.module('KitApp.services', [])
           sv.contacts.arr[i].showForm = false;
           sv.contacts.arr[i].showFormFunc = function() {
             if(this.showForm === true) {
-              return this.showForm = false;
+              this.showForm = false;
             } else if(this.showForm === false) {
-              return this.showForm = true;
+              this.showForm = true;
             }
           };
 
@@ -117,8 +117,9 @@ angular.module('KitApp.services', [])
 
         }
 
-        sv.contacts.getRandomContact = function(input) {
-          input = this.arr;
+        sv.contacts.getRandomContact = function() {
+          $state.reload();
+          var input = this.arr;
           var randInt = Math.floor(Math.random() * (input.length));
           // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
           // var freq = input[randInt].frequency_of_contact * 86164;
@@ -131,10 +132,8 @@ angular.module('KitApp.services', [])
 
         sv.contacts.updateLastContact = function() {
           this.randomContact.last_contact =  new Date();
-          $http.put(routeToAPI + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
-          .then(function(response) {
-            console.log(response);
-            this.randomContact.contacted = true;
+          $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
+          .then(function() {
             sv.contacts.showAlert();
           })
           .catch(function(err) {
