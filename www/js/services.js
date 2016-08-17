@@ -50,8 +50,8 @@ angular.module('KitApp.services', [])
 
   vm.logout = function() {
     delete $window.sessionStorage.token;
-    vm.loginView.show = true;
     delete $window.sessionStorage.id;
+    vm.loginView.show = true;
   };
 
 }])
@@ -155,7 +155,9 @@ angular.module('KitApp.services', [])
       .catch(function(err) {
         console.log('getContacts ERR:', err);
       });
-    };
+
+  };
+
 
   sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
@@ -177,7 +179,6 @@ angular.module('KitApp.services', [])
   //   .then(function(response) {
   //
   //   });
-  // };
 
 }])
 
