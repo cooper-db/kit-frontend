@@ -22,37 +22,31 @@
     <input type="radio" name="relationship" ng-model="relationship" value="professional"> Professional<br> -->
 
 
-    <ion-list>
-      <ion-radio ng-model="relationship" ng-value="'social'">Social</ion-radio>
-      <ion-radio ng-model="relationship" ng-value="'professional'">Professional</ion-radio>
-    </ion-list>
-
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Relationship
+        </div>
+        <select name="relationship" ng-model="relationship">
+          <option ng-model="relationship" value="family">family</option>
+          <option ng-model="relationship" value="social" selected>social</option>
+          <option ng-model="relationship" value="professional">professional</option>
+        </select>
+      </label>
+    </div>
 
     <div class="list">
-
       <label class="item item-input item-select">
         <div class="input-label">
           Frequency of Contact
         </div>
-        <select>
-          <option>weekly</option>
-          <option selected>monthly</option>
-          <option>quarterly</option>
+        <select name="freq" ng-model="freq">
+          <option ng-model="freq" value="7">weekly</option>
+          <option ng-model="freq" value="30" selected>monthly</option>
+          <option ng-model="freq" value="90">quarterly</option>
         </select>
       </label>
-
     </div>
-
-    <!-- <label>Frequency
-      <select name="freq" ng-model="freq">
-        <option value="7">weekly</option>
-        <option value="30">monthly</option>
-        <option value="90">quarterly</option>
-      </select>
-    </label> -->
-
-  <!-- frequency -->
-
 
   <label class="item item-input item-floating-label">
     <span class="input-label">Notes</span>
