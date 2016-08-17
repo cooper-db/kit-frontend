@@ -5,7 +5,7 @@
     <h1 style="color:white;font-family:'Londrina Outline',cursive;">KiT</h1>
   </ion-nav-title>
   <ion-content class="padding contact">
-    
+
     <!-- Jimmy's contact button -->
     <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getNativeContact()" ng-disabled="CC.loginView.show"> Get Contact </button>
     <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>
@@ -13,8 +13,8 @@
 
     <ul class="list">
       <div ng-repeat="contact in CC.contacts.arr">
-        <li class="item" ng-click="contact.showFormFunc()">
-          <h2>{{contact.name}}</h2>
+        <li class="item">
+          <h2 ng-click="contact.showFormFunc()">{{contact.name}}</h2>
 
           <div ng-show="contact.showForm">
             <p>
@@ -28,10 +28,63 @@
               <button ng-click="contact.deleteContact()" class="button ion-trash-a"> Remove </button>
             </p>
             <!-- Edit form goes here with ng-show="showEdit" -->
-            <!-- <h2 ng-show="contact.showEditForm">THIS IS THE EDIT FORM</h2> -->
 
           </div>
-          <h2 ng-show="contact.showEditForm">THIS IS THE EDIT FORM</h2>
+
+          <form ng-show="contact.showEditForm" id="edit-contact-form" novalidate>
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Name</span>
+              <input type="text" placeholder="Name" ng-model="form.name" value="contact.name" required>
+            </label>
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Phone</span>
+              <input type="tel" placeholder="phone" ng-model="form.phone" ng-minlength="10" required>
+              <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
+            </label>
+
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Email</span>
+              <input type="email" placeholder="email" ng-model="form.email">
+            </label>
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Choose a Relationship
+                </div>
+                <select name="relationship" ng-model="form.relationship">
+                  <option ng-model="form.relationship" value="family">Family</option>
+                  <option ng-model="form.relationship" value="social" selected>Social</option>
+                  <option ng-model="form.relationship" value="professional">Professional</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  How often should KiT remind you?
+                </div>
+                <select name="freq" ng-model="form.freq">
+                  <option ng-model="form.freq" value="7">Weekly</option>
+                  <option ng-model="form.freq" value="14">Bi-Weekly</option>
+                  <option ng-model="form.freq" value="30" selected>Monthly</option>
+                  <option ng-model="form.freq" value="90">Quarterly</option>
+                  <option ng-model="form.freq" value="180">Bi-Annually</option>
+                  <option ng-model="form.freq" value="365">Annually</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Notes</span>
+              <input type="text" placeholder="notes" ng-model="form.notes">
+            </label>
+
+            <button ng-click="contact.showEditFormFunc()" class="button button-stable button-block">Close</button>
+            <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
+          </form>
+
+
         </li>
   </div>
 </ul>

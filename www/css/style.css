@@ -49,3 +49,7 @@ span.default-title {
 #create-contact-form .input-label {
   color: #983628;
 }
+
+#edit-contact-form {
+  color: black;
+}
