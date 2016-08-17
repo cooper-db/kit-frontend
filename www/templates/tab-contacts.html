@@ -6,10 +6,9 @@
     <hr>
     <hr>
     <button class="button button-stable button-block" ng-click="CC.func()">Button</button>
-    <h1>{{CC.contacts.arr}}</h1>
     <h1>{{CC.message}}</h1>
-    <div ng-repeat="contact in CC.contacts">
-        {{contact}}
+    <div ng-repeat="contact in CC.contacts.arr">
+        <p>{{contact.name}}</p>
         <hr>
     </div>
 
