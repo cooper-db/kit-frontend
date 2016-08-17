@@ -41,10 +41,54 @@ angular.module('KitApp.controllers', [])
   vm.message = ContactService.message;
 
   vm.showAddContactForm = false;
-
+  var isIOS = ionic.Platform.isIOS();
   //Works
-  vm.getContacts = function() {     $cordovaContacts.pickContact()
-     .then(function(result) {         console.log(result);     }); }
+  vm.getContacts = function() {
+    $cordovaContacts.pickContact()
+     .then(function(result) {
+
+       if(isIOS == true){
+         alert(Object.keys(result));
+        //  alert(result.displayName); //This is null in IOS
+        //  alert(result.name.givenName);
+        //  alert(result.name.familyName);
+         alert(result.name.formatted); // USE THIS FOR SIMPLICITY
+         alert(Object.keys(result.phoneNumbers)); //This is an array // [object, Object]
+         alert(JSON.stringify(result.phoneNumbers[0])); //This is an array // [object, Object]
+         alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
+         alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
+         alert(Object.keys(result));
+         
+       } else {
+         // result // this is an object
+          alert(Object.keys(result));
+         //  alert(result.id); //This is number
+          // alert(result.displayName); //This is text // N/A in IOS
+          // alert(result.name.familyName);
+          // alert(result.givenName);
+          alert(result.name.formatted); //USE FOR SIMPlICITY
+          // alert(Object.keys(result.name));
+          alert(JSON.stringify(result.phoneNumbers[0])); //This is an array // [object, Object]
+          alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
+          alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
+         //  alert(result.addressess); //undefined
+         //  alert(result.ims); // null
+         //  alert(result.organizations); //null
+         //  alert(result.birthday); // invalid date
+         //  alert(result.note);
+         //  alert(result.photos);
+         //  alert(result.categories);
+         //  alert(result.urls);
+         //  alert(result[0]);
+         //  alert(typeof result);
+         //  alert(typeof result[0]);
+         //  console.log(result);
+       }
+
+
+
+     });
+   };
 
 
 }])
@@ -53,11 +97,9 @@ angular.module('KitApp.controllers', [])
   var vm = this;
   vm.addContact = ContactService.addContact;
 
-
-
   vm.addContact = function(name){
     console.log("connected to addContact function");
     console.log(name);
   };
-  
+
 }]);
