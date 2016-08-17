@@ -10,8 +10,6 @@ angular.module('KitApp.controllers', [])
 
   vm.contacts = ContactService.contacts;
 
-  console.log(vm.contacts);
-
 }])
 
 .controller('AccountController', ['LoginService', 'SignupService', '$location', '$window', function(LoginService, SignupService, $location, $window) {
@@ -99,6 +97,9 @@ angular.module('KitApp.controllers', [])
   var vm = this;
   vm.addContact = ContactService.addContact;
 
-
+  vm.setPristine = function(){
+    console.log('setting pristine');
+    vm.createContactForm.$setPristine();
+  };
 
 }]);
