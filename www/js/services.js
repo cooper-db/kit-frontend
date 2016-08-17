@@ -156,7 +156,7 @@ angular.module('KitApp.services', [])
       });
 
 
-  sv.addContact = function(name, phone, email, relationship, freq, notes){
+  sv.addContact = function(name, phone, email, relationship, freq, notes){ 
     var id = $window.sessionStorage.id;
     console.log(name, phone, email, relationship, freq, notes);
     $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})

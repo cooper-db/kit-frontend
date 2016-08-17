@@ -20,15 +20,11 @@
               <span class="icon ion-ios-telephone-outline"></span> {{contact.phone}}</br>
               <span class="icon ion-ios-email-outline"></span> {{contact.email}}</br>
               <span class="icon ion-ios-body-outline"></span> {{contact.relationship}}</br>
-              <!-- {{contact.frequency_of_contact}}</br> -->
               <span class="icon ion-ios-bookmarks-outline"></span> {{contact.notes}}</br>
-              <small>Last contacted on: {{contact.last_contact}}</small></br>
+              <span class="ion-ios-time-outline"></span><small> Last contacted: <span am-time-ago="contact.last_contact">{{contact.last_contact}}</span></small></br>
 
               <button ng-click="contact.showEditFormFunc()" class="button ion-edit"> Edit </button>
               <button ng-click="contact.deleteContact()" class="button ion-trash-a"> Remove </button>
-
-              <!-- <span ng-click="contact.showEditFormFunc()"><span class="icon ion-edit"></span> Edit </span> -->
-              <!-- <span ng-click="contact.deleteContact()"><span class="icon ion-trash-a"></span> Delete</span> -->
             </p>
             <!-- Edit form goes here with ng-show="showEdit" -->
             <!-- <h2 ng-show="contact.showEditForm">THIS IS THE EDIT FORM</h2> -->
