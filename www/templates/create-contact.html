@@ -1,6 +1,5 @@
 <!-- <form name="ACC.createContactForm" ng-submit="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes)"> -->
 <form name="ACC.createContactForm">
-
   <label class="item item-input item-floating-label">
     <span class="input-label">Name</span>
     <input type="text" placeholder="name" ng-model="form.name">
@@ -47,6 +46,6 @@
     <input type="text" placeholder="notes" ng-model="form.notes">
   </label>
 
-  <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Cancel</button>
-  <button ng-submit="ACC.addContact(form); ACC.setPristine(); form = {}" type="submit" class="button button-stable button-block">Add</button>
+  <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
+  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" type="submit" class="button button-stable button-block">Add</button>
 </form>
