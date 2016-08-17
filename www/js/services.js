@@ -67,6 +67,17 @@ angular.module('KitApp.services', [])
       console.log('getContacts response: ', response.data);
       sv.contacts.arr = response.data;
       sv.contacts.length = response.data.length;
+      for (var i = 0; i < sv.contacts.arr.length; i++) {
+        sv.contacts.arr[i].showForm = false;
+        // console.log(sv.contacts.arr[i].showForm);
+        sv.contacts.arr[i].showFormFunc = function() {
+          if(this.showForm === true) {
+            return this.showForm = false;
+          } else if(this.showForm === false) {
+            return this.showForm = true;
+          }
+        };
+      }
       // return response.data;
     })
     .catch(function(err) {
@@ -87,6 +98,22 @@ angular.module('KitApp.services', [])
       console.log(err);
     });
   };
+
+  // sv.showInfo = function() {
+  //   //get into array of contacts
+  //   for (var i = 0; i < sv.contacts.arr.length; i++) {
+  //
+  //     sv.contacts.arr[i].showForm = false;
+  //     console.log(sv.contacts.arr[i].showForm);
+  //     sv.contacts.arr[i].showFormFunc = function() {
+  //       if(this.showForm === true) {
+  //         return this.showForm = false;
+  //       } else if(this.showForm === false) {
+  //         return this.showForm = true;
+  //       }
+  //     };
+  //   }
+
 
 }])
 
