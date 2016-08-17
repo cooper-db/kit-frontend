@@ -17,21 +17,41 @@
   </label>
 
 
-  <label> Relationship </label>
+  <!-- <label> Relationship </label>
     <input type="radio" name="relationship" ng-model="relationship" value="social" checked> Social
-    <input type="radio" name="relationship" ng-model="relationship" value="professional"> Professional<br>
+    <input type="radio" name="relationship" ng-model="relationship" value="professional"> Professional<br> -->
 
 
-    <label>Frequency
+    <ion-list>
+      <ion-radio ng-model="relationship" ng-value="'social'">Social</ion-radio>
+      <ion-radio ng-model="relationship" ng-value="'professional'">Professional</ion-radio>
+    </ion-list>
+
+
+    <div class="list">
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Frequency of Contact
+        </div>
+        <select>
+          <option>weekly</option>
+          <option selected>monthly</option>
+          <option>quarterly</option>
+        </select>
+      </label>
+
+    </div>
+
+    <!-- <label>Frequency
       <select name="freq" ng-model="freq">
         <option value="7">weekly</option>
         <option value="30">monthly</option>
         <option value="90">quarterly</option>
       </select>
-    </label>
+    </label> -->
 
   <!-- frequency -->
-
 
 
   <label class="item item-input item-floating-label">
