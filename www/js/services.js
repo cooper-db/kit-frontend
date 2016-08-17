@@ -60,6 +60,7 @@ angular.module('KitApp.services', [])
   var sv = this;
 
   sv.contacts = {};
+  sv.addContactForm =   {};
 
   sv.getContacts = function(id) {
     var id = $window.sessionStorage.id;

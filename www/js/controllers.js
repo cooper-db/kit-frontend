@@ -85,6 +85,9 @@ angular.module('KitApp.controllers', [])
   var vm = this;
   vm.addContact = ContactService.addContact;
 
-
+  vm.setPristine = function(){
+    console.log('setting pristine');
+    vm.createContactForm.$setPristine();
+  };
 
 }]);
