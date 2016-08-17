@@ -1,19 +1,21 @@
 <ion-view>
-  <ion-content>
+  <ion-content class="account">
     <div class="card padding">
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Username</span>
-        <input type="text" placeholder="Username">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Password</span>
-        <input type="password" placeholder="Password">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Reenter password</span>
-        <input type="password" placeholder="Reenter password">
-      </label>
-      <button class="button button-stable button-block">Create Account</button>
+      <form name="signupForm" ng-submit="AC.signup(user)">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Username</span>
+          <input type="text" placeholder="Username" name="username" ng-model="user.username" required>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="Password" name="password" ng-model="user.password" required>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Confirm Password</span>
+          <input type="password" placeholder="Confirm Password" name="confirmPassword" ng-model="user.confirmPassword" required compare-to="user.password" />
+        </label>
+        <button type="submit" class="button button-stable button-block" ng-disabled="signupForm.$invalid">Create Account</button>
+      </form>
     </div>
   </ion-content>
 </ion-view>
