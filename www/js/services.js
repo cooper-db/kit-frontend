@@ -2,7 +2,23 @@
 
 angular.module('KitApp.services', [])
 
-.service('LoginService', ['$http', '$location', '$window', 'ContactService', function($http, $location, $window, ContactService) {
+//-----------------------------------------------------------------------------
+// IF YOU NEED TO CHANGE THE DATABASE YOU'RE HITTING, DO IT HERE.
+
+//commment IN to hit LIVE HEROKU HOSTED DATABASE!
+//p.s. - you'll need to comment out the constant BELOW this one too!
+.constant("routeToAPI", {
+        "url": "https://keep-intouch.herokuapp.com",
+    })
+
+// //comment IN to hit LOCALLY HOSTED DATABASE!
+// //p.s. - you'll need to comment out the constant ABOVE this one too!
+// .constant("routeToAPI", {
+//         "url": "http://localhost:3000",
+//     });
+//-----------------------------------------------------------------------------
+
+.service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
   var vm = this;
 
   if ($window.sessionStorage.token) {
@@ -16,7 +32,7 @@ angular.module('KitApp.services', [])
   vm.contacts;
 
   vm.login = function(username, password) {
-    $http.post('http://localhost:3000/auth/login', {username: username, password: password})
+    $http.post(routeToAPI.url + '/auth/login', {username: username, password: password})
     .then(function(response) {
       console.log(response);
       $window.sessionStorage.token = response.data.token;
@@ -40,10 +56,10 @@ angular.module('KitApp.services', [])
 
 }])
 
-.service('SignupService', ['$http', '$location', '$window', function($http, $location, $window) {
+.service('SignupService', ['$http', '$location', '$window', 'routeToAPI', function($http, $location, $window, routeToAPI) {
   var vm = this;
   vm.signup = function(user) {
-    $http.post('http://localhost:3000/auth/signup', {username: user.username, password: user.password})
+    $http.post(routeToAPI.url + '/auth/signup', {username: user.username, password: user.password})
     .then(function(response){
       console.log(response);
       $window.sessionStorage.token = response.data.token;
@@ -56,15 +72,15 @@ angular.module('KitApp.services', [])
   };
 }])
 
-.service('ContactService', ['$http', '$ionicPopup', '$window', '$cordovaContacts', function($http, $ionicPopup, $window, $cordovaContacts) {
+.service('ContactService', ['$http', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
   var sv = this;
 
   sv.contacts = {};
   sv.addContactForm =   {};
 
   sv.getContacts = function(id) {
-    id = $window.sessionStorage.id;
-    $http.get('http://localhost:3000/users/' + id + '/contacts')
+     id = $window.sessionStorage.id;
+    $http.get(routeToAPI.url + '/users/' + id + '/contacts')
       .then(function(response) {
 
         console.log('getContacts response: ', response.data);
@@ -115,8 +131,9 @@ angular.module('KitApp.services', [])
 
         sv.contacts.updateLastContact = function() {
           this.randomContact.last_contact =  new Date();
-          $http.put('http://localhost:3000/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
-          .then(function() {
+          $http.put(routeToAPI + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
+          .then(function(response) {
+            console.log(response);
             this.randomContact.contacted = true;
             sv.contacts.showAlert();
           })
@@ -138,12 +155,12 @@ angular.module('KitApp.services', [])
       .catch(function(err) {
         console.log('getContacts ERR:', err);
       });
-
+    };
 
   sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
     console.log(name, phone, email, relationship, freq, notes);
-    $http.post('http://localhost:3000/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
+    $http.post(routeToAPI.url + '/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
     .then(function(response){
       console.log('successfully posted a new contact');
       console.log(response.data);
@@ -160,7 +177,7 @@ angular.module('KitApp.services', [])
   //   .then(function(response) {
   //
   //   });
-  };
+  // };
 
 }])
 

@@ -1,11 +1,11 @@
-<form name="ACC.createContactForm">
+<form name="ACC.createContactForm" id="create-contact-form" novalidate>
   <label class="item item-input item-floating-label">
     <span class="input-label">Name</span>
-    <input type="text" placeholder="name" ng-model="form.name">
+    <input type="text" placeholder="name" ng-model="form.name" required>
   </label>
   <label class="item item-input item-floating-label">
     <span class="input-label">Phone</span>
-    <input type="tel" placeholder="phone" ng-model="form.phone">
+    <input type="tel" placeholder="phone" ng-model="form.phone" ng-minlength="10" required>
     <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
   </label>
 
@@ -33,8 +33,11 @@
       </div>
       <select name="freq" ng-model="form.freq">
         <option ng-model="form.freq" value="7">Weekly</option>
+        <option ng-model="form.freq" value="14">Bi-Weekly</option>
         <option ng-model="form.freq" value="30" selected>Monthly</option>
         <option ng-model="form.freq" value="90">Quarterly</option>
+        <option ng-model="form.freq" value="180">Bi-Annually</option>
+        <option ng-model="form.freq" value="365">Annually</option>
       </select>
     </label>
   </div>
@@ -45,5 +48,5 @@
   </label>
 
   <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
-  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" type="submit" class="button button-stable button-block">Add</button>
+  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
 </form>

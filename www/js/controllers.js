@@ -106,7 +106,11 @@ angular.module('KitApp.controllers', [])
 
 .controller('AddContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
   var vm = this;
-  vm.addContact = ContactService.addContact;
+  //vm.addContact = ContactService.addContact;
+  vm.addContact = function(name, phone, email, relationship, freq, notes){
+    console.log('wat the hell');
+    ContactService.addContact(name, phone, email, relationship, freq, notes);
+  };
 
   vm.setPristine = function(){
     console.log('setting pristine');
