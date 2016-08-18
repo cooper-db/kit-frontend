@@ -53,3 +53,13 @@ span.default-title {
 #edit-contact-form {
   color: black;
 }
+
+.input-invalid-message {
+  color: gray;
+}
+.input-valid-message {
+  color: green;
+}
+#passwords-match-message {
+  color: green;
+}
