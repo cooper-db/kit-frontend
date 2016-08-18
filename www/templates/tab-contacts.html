@@ -31,27 +31,31 @@
           </div>
 
           <!-- Edit form goes here with ng-show="showEdit" -->
-          <form name="CC.editContactForm" ng-show="contact.showEditForm" id="edit-contact-form" novalidate>
+          <form name="CC.editContactForm" ng-show="contact.showEditForm" id="edit-contact-form" ng-init="form.name=contact.name; form.phone=contact.phone; form.email=contact.email; form.relationship=contact.relationship; form.freq=contact.frequency_of_contact.toString(); form.notes=contact.notes" novalidate>
             <label class="item item-input item-floating-label">
               <span class="input-label">Name</span>
+<<<<<<< HEAD
+              <input type="text" placeholder="Name" ng-model="form.name" value="form.name" required>
+=======
               <input type="text" placeholder="Name" ng-model="form.name" ng-init="contact.name" required>
+>>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
             </label>
             <label class="item item-input item-floating-label">
               <span class="input-label">Phone</span>
-              <input type="tel" placeholder="phone" ng-model="form.phone" ng-minlength="10" value="contact.phone" required>
+              <input type="tel" placeholder="phone" ng-model="form.phone" value="form.phone" ng-minlength="10" value="contact.phone" required>
               <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
             </label>
 
             <label class="item item-input item-floating-label">
               <span class="input-label">Email</span>
-              <input type="email" placeholder="email" ng-model="form.email">
+              <input type="email" placeholder="email" value="form.phone" ng-model="form.email">
             </label>
             <div class="list">
               <label class="item item-input item-select">
                 <div class="input-label">
                   Choose a Relationship
                 </div>
-                <select name="relationship" ng-model="form.relationship">
+                <select name="relationship" ng-model="form.relationship" value="form.relationship">
                   <option ng-model="form.relationship" value="family">Family</option>
                   <option ng-model="form.relationship" value="social" selected>Social</option>
                   <option ng-model="form.relationship" value="professional">Professional</option>
@@ -62,31 +66,27 @@
             <div class="list">
               <label class="item item-input item-select">
                 <div class="input-label">
-                  How often should KiT remind you?
+                  Call frequency
                 </div>
-                <select name="freq" ng-model="form.freq">
-                  <option ng-model="form.freq" value="7">Weekly</option>
-                  <option ng-model="form.freq" value="14">Bi-Weekly</option>
-                  <option ng-model="form.freq" value="30" selected>Monthly</option>
-                  <option ng-model="form.freq" value="90">Quarterly</option>
-                  <option ng-model="form.freq" value="180">Bi-Annually</option>
-                  <option ng-model="form.freq" value="365">Annually</option>
+                <select name="freq" ng-model="form.freq" value={{form.freq}}>
+                  <option value="7">Weekly</option>
+                  <option value="14">Bi-Weekly</option>
+                  <option value="30" >Monthly</option>
+                  <option value="90">Quarterly</option>
+                  <option value="180">Bi-Annually</option>
+                  <option value="365">Annually</option>
                 </select>
               </label>
             </div>
-
             <label class="item item-input item-floating-label">
               <span class="input-label">Notes</span>
-              <input type="text" placeholder="notes" ng-model="form.notes">
+              <input type="text" placeholder="notes" ng-model="form.notes" value="form.notes">
             </label>
 
-            <button ng-click="contact.showEditFormFunc()" class="button button-stable button-block">Close</button>
+            <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Close</button>
 
-            <!-- TODO: -->
-            <button ng-click="contact.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="CC.editContactForm.$invalid">Edit Contact</button>
+            <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, contact.id); CC.setPristine(); form = {}" class="button button-stable button-block">Edit Contact</button>
           </form>
-
-
         </li>
   </div>
 </ul>

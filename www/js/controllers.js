@@ -10,6 +10,8 @@ angular.module('KitApp.controllers', [])
 
   vm.contacts = ContactService.contacts;
 
+  vm.suggestions = ContactService.possibleSuggestions;
+
 }])
 
 .controller('AccountController', ['LoginService', 'SignupService', function(LoginService, SignupService) {
@@ -52,16 +54,23 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', function(ContactService, LoginService, $cordovaContacts ) {
+
+.controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', '$window', function(ContactService, LoginService, $cordovaContacts, $window ) {
   var vm = this;
 
   vm.contacts = ContactService.contacts;
+
+  vm.editContact = ContactService.editContact;
 
   vm.message = ContactService.message;
 
   vm.loginView = LoginService.loginView;
 
+  var id = $window.sessionStorage.id;
+
   vm.showAddContactForm = false;
+
+
   var isIOS = ionic.Platform.isIOS();
   //Works
   vm.getContacts = function() {
@@ -69,63 +78,27 @@ angular.module('KitApp.controllers', [])
      .then(function(result) {
 
        if(isIOS == true){
-         alert(Object.keys(result));
-        //  alert(result.displayName); //This is null in IOS
-        //  alert(result.name.givenName);
-        //  alert(result.name.familyName);
-         alert(result.name.formatted); // USE THIS FOR SIMPLICITY
-         alert(Object.keys(result.phoneNumbers)); //This is an array // [object, Object]
-         alert(JSON.stringify(result.phoneNumbers[0])); //This is an array // [object, Object]
-         alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
-         alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
-         alert(Object.keys(result));
+         ContactService.addContact(result.name.formatted, result.phoneNumbers[0].value);
+         ContactService.getContacts(id);
+         alert("Added Contact");
 
        } else {
-         // result // this is an object
-          alert(Object.keys(result));
-         //  alert(result.id); //This is number
-          // alert(result.displayName); //This is text // N/A in IOS
-          // alert(result.name.familyName);
-          // alert(result.givenName);
-          alert(result.name.formatted); //USE FOR SIMPlICITY
-          // alert(Object.keys(result.name));
-          alert(JSON.stringify(result.phoneNumbers[0])); //This is an array // [object, Object]
-          alert(result.phoneNumbers[0].value); // PHONE NUMBER!!
-          alert(result.phoneNumbers[0].type); //PHONE NUMBER TYPE
-         //  alert(result.addressess); //undefined
-         //  alert(result.ims); // null
-         //  alert(result.organizations); //null
-         //  alert(result.birthday); // invalid date
-         //  alert(result.note);
-         //  alert(result.photos);
-         //  alert(result.categories);
-         //  alert(result.urls);
-         //  alert(result[0]);
-         //  alert(typeof result);
-         //  alert(typeof result[0]);
-         //  console.log(result);
+         ContactService.addContact(result.name.formatted, result.phoneNumbers[0].value);
+         ContactService.getContacts(id);
+         alert("Added Contact");
        }
+
+
+     vm.setPristine = function(){
+       console.log('setting pristine');
+       vm.editContactForm.$setPristine();
+     };
+
 
 
 
      });
    };
-
-
-  // vm.contacts.arr[i].showForm = false;
-
-
-
-  // vm.showForm = false;
-  //
-  // vm.showInfo = function() {
-  //   if(!vm.showForm) {
-  //     vm.showForm = true;
-  //   } else {
-  //     vm.showForm = false;
-  //   }
-  // }
-
 }])
 
 .controller('AddContactController', ['ContactService', function(ContactService) {
@@ -135,6 +108,8 @@ angular.module('KitApp.controllers', [])
     console.log('wat the hell');
     ContactService.addContact(name, phone, email, relationship, freq, notes);
   };
+
+  // vm.setPristine = ContactService.setPristine;
 
   vm.setPristine = function(){
     console.log('setting pristine');
