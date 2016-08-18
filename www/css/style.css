@@ -55,7 +55,9 @@ span.default-title {
   position:relative;
   top: 2em;
 }
-
+.error-message {
+  color: red;
+}
 .input-invalid-message {
   color: gray;
 }

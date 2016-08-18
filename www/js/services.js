@@ -59,6 +59,7 @@ angular.module('KitApp.services', [])
 
 .service('SignupService', ['$http', '$location', '$window', 'routeToAPI', function($http, $location, $window, routeToAPI) {
   var vm = this;
+  vm.errors =[];
   vm.signup = function(user) {
     $http.post(routeToAPI.url + '/auth/signup', {username: user.username, password: user.password})
     .then(function(response){
@@ -68,10 +69,18 @@ angular.module('KitApp.services', [])
       $location.path('/tab/home');
     })
     .catch(function(err) {
-      for (var i = 0; i < err.data.length; i++){
-        vm.errors.push(err.data[i].message);
-        console.log(err.data[i].message);
+      console.log(err.data.message);
+      if (err.data.message === 'Sorry, but that username already exists!') {
+        console.log('caught username error');
+        vm.errors.push(err.data.message);
+        console.log(vm.errors);
+      } else {
+        for (var i = 0; i < err.data.length; i++){
+          vm.errors.push(err.data[i].message);
+          console.log(err.data[i].message);
+        }
       }
+
     });
   };
 
