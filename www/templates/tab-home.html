@@ -1,6 +1,7 @@
 <ion-view>
   <ion-nav-title>
-    <h1 style="color:white;font-family:'Londrina Outline',cursive;">KiT</h1>
+    <!-- <img src="img/KiTlogo.png" style="width:15%;color:white;float:right;" /> -->
+    <h1 style="color:white;font-family:'Londrina Outline',cursive">KiT</h1>
   </ion-nav-title>
   <ion-content class="padding home">
     <div ng-show="HC.loginView.show">
@@ -13,8 +14,8 @@
       <h1 style="color:white;text-align:center">Uh oh! It looks like you haven't added any contacts yet.</h1>
       <p style="color:white;text-align:center">Go ahead and add some from the 'contacts' tab.</p>
     </div>
-    <div ng-hide="HC.loginView.show || HC.contacts.length === 0">
-      <h2 style="text-align:center;color:white">Let's get in touch with . . .</h2>
+    <div ng-hide="HC.loginView.show || HC.contacts.length === 0 || HC.suggestions.length === 0">
+      <h2 style="text-align:center;color:white">Let's get in touch with:</h2>
       <h1 style="text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:7em">{{HC.contacts.randomContact.name}}</h1>
       <h1 style="text-align:center;color:white">Today!</h1>
       <hr>
@@ -25,7 +26,10 @@
       <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.notes}}</h3>
       <hr>
       <button class="button button-block button-stable button-large" ng-click="HC.contacts.updateLastContact()">Did it!</button>
-      <button class="button button-block button-stable button-large" ng-click="HC.contacts.getRandomContact()">Another</button>
+      <button class="button button-block button-stable button-large" ng-show="HC.suggestions.length > 0" ng-click="HC.contacts.getRandomContact()">Another</button>
+    </div>
+    <div ng-show="HC.suggestions.current">
+        <h2 style="color:white;text-align:center">You're current! - There are no remaining suggestions.</h2>
     </div>
     <ka-contact-suggestion></ka-contact-suggestion>
   </ion-content>

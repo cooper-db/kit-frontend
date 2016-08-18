@@ -34,7 +34,11 @@
           <form name="CC.editContactForm" ng-show="contact.showEditForm" id="edit-contact-form" ng-init="form.name=contact.name; form.phone=contact.phone; form.email=contact.email; form.relationship=contact.relationship; form.freq=contact.frequency_of_contact.toString(); form.notes=contact.notes" novalidate>
             <label class="item item-input item-floating-label">
               <span class="input-label">Name</span>
+<<<<<<< HEAD
               <input type="text" placeholder="Name" ng-model="form.name" value="form.name" required>
+=======
+              <input type="text" placeholder="Name" ng-model="form.name" ng-init="contact.name" required>
+>>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
             </label>
             <label class="item item-input item-floating-label">
               <span class="input-label">Phone</span>

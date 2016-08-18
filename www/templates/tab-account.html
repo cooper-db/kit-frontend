@@ -5,5 +5,30 @@
   <ion-content class="padding account">
     <ka-login ng-show="AC.loginView.show"></ka-login>
     <button class="button button-block button-assertive" ng-click="AC.logout()" ng-hide="AC.loginView.show">Logout</button>
+    <button class="button button-block button-positive" ng-click="AC.resetFormToggle()" ng-hide="AC.loginView.show">Reset Password</button>
+
+    <div class="card padding" ng-show="AC.resetForm.show">
+      <form name="signupForm"  ng-submit="AC.resetPassword(user.password)">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">New Password</span>
+          <input type="password" placeholder="Password" name="password" ng-model="user.password" ng-minlength="8" required password-validation>
+          <small class="input-invalid-message" ng-show="signupForm.password.$invalid && signupForm.password.$dirty">password should be at least 8 letters</small><br>
+          <small class="input-invalid-message" ng-show="signupForm.password.$invalid && signupForm.password.$dirty">use at least one number and one special char</small>
+          <small class="input-valid-message" ng-show="signupForm.password.$valid && signupForm.password.$dirty">password looks great!</small>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Confirm Password</span>
+          <input type="password" placeholder="Confirm Password" name="confirmPassword" ng-model="user.confirmPassword" required compare-to="user.password" />
+          <small id="passwords-match-message" ng-show="user.password === user.confirmPassword && signupForm.password.$valid">passwords match!</small>
+        </label>
+        <p style="color:green">{{AC.resetResponse.success}}</p>
+        <p style="color:red">{{AC.resetResponse.error}}</p>
+        <button type="submit" class="button button-stable button-block" ng-disabled="signupForm.$invalid">Reset Password</button>
+      </form>
+      <div ng-repeat="message in AC.errors">
+        {{message}}
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

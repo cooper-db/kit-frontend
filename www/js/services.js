@@ -68,9 +68,29 @@ angular.module('KitApp.services', [])
       $location.path('/tab/home');
     })
     .catch(function(err) {
+<<<<<<< HEAD
       console.log(err);
+=======
+      for (var i = 0; i < err.data.length; i++){
+        vm.errors.push(err.data[i].message);
+        console.log(err.data[i].message);
+      }
+>>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
     });
   };
+
+  vm.resetResponse = {};
+
+  vm.resetPassword = function(newPassword) {
+    $http.post(routeToAPI.url + '/users/reset', {newPassword: newPassword})
+    .then(function(response) {
+      vm.resetResponse.success = response.data.message;
+    })
+    .catch(function(err) {
+      vm.resetResponse.error = err.data.message;
+    });
+  };
+
 }])
 
 .service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', '$location', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI, $location) {
@@ -78,6 +98,7 @@ angular.module('KitApp.services', [])
 
   sv.contacts = {};
   sv.addContactForm =   {};
+  sv.possibleSuggestions = [];
 
   sv.editContact = function(name, phone, email, relationship, freq, notes, contactId) {
     var id = $window.sessionStorage.id;
@@ -166,6 +187,7 @@ angular.module('KitApp.services', [])
 
         sv.contacts.getRandomContact = function() {
           $state.reload();
+<<<<<<< HEAD
           var input = this.arr;
           var randInt = Math.floor(Math.random() * (input.length));
           // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
@@ -173,6 +195,26 @@ angular.module('KitApp.services', [])
           // var now = Date.now() / 1000;
           // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
           this.randomContact = input[randInt];
+=======
+          sv.possibleSuggestions.length = 0;
+          var allContacts = this.arr;
+          var currentDate = new Date();
+
+          for (var i = 0; i < allContacts.length; i++) {
+              var last = new Date(allContacts[i].last_contact);
+              var freq = allContacts[i].frequency_of_contact;
+              var modifier = last.getDate() + freq;
+              var next = last.setDate(modifier);
+              if (next < currentDate) {
+                  sv.possibleSuggestions.push(allContacts[i]);
+              }
+          }
+          if (sv.possibleSuggestions.length > 0) {
+              var randInt = Math.floor(Math.random() * (sv.possibleSuggestions.length));
+              this.randomContact = sv.possibleSuggestions[randInt];
+          }
+          sv.possibleSuggestions.current = !sv.possibleSuggestions.length;
+>>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
         };
 
         sv.contacts.getRandomContact();
@@ -181,6 +223,9 @@ angular.module('KitApp.services', [])
           this.randomContact.last_contact =  new Date();
           $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
           .then(function() {
+              $state.reload();
+              sv.contacts.getRandomContact();
+              sv.possibleSuggestions.current = !sv.possibleSuggestions.length;
             sv.contacts.showAlert();
           })
           .catch(function(err) {
@@ -194,7 +239,7 @@ angular.module('KitApp.services', [])
             template: 'Feel free to stop for the day, or keep going!'
           });
           alertPopup.then(function(res) {
-            console.log(res);
+            console.log('Show Alert is: ', res);
           });
         };
       })
