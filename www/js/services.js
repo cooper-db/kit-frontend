@@ -7,15 +7,15 @@ angular.module('KitApp.services', [])
 
 //commment IN to hit LIVE HEROKU HOSTED DATABASE!
 //p.s. - you'll need to comment out the constant BELOW this one too!
-.constant("routeToAPI", {
-        "url": "https://keep-intouch.herokuapp.com",
-    })
+// .constant("routeToAPI", {
+//         "url": "https://keep-intouch.herokuapp.com",
+//     })
 
 // //comment IN to hit LOCALLY HOSTED DATABASE!
 // //p.s. - you'll need to comment out the constant ABOVE this one too!
-// .constant("routeToAPI", {
-//         "url": "http://localhost:3000",
-//     })
+.constant("routeToAPI", {
+        "url": "http://localhost:3000",
+    })
 //-----------------------------------------------------------------------------
 
 .service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
@@ -74,6 +74,19 @@ angular.module('KitApp.services', [])
       }
     });
   };
+
+  vm.resetResponse = {};
+
+  vm.resetPassword = function(newPassword) {
+    $http.post(routeToAPI.url + '/users/reset', {newPassword: newPassword})
+    .then(function(response) {
+      vm.resetResponse.success = response.data.message;
+    })
+    .catch(function(err) {
+      vm.resetResponse.error = err.data.message;
+    });
+  };
+
 }])
 
 .service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
