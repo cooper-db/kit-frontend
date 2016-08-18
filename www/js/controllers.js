@@ -10,6 +10,8 @@ angular.module('KitApp.controllers', [])
 
   vm.contacts = ContactService.contacts;
 
+  vm.updateLastContact = ContactService.editContact;
+
   vm.suggestions = ContactService.possibleSuggestions;
 
 }])
