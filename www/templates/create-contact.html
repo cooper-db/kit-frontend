@@ -1,18 +1,21 @@
 <form name="ACC.createContactForm" id="create-contact-form" novalidate>
+
   <label class="item item-input item-floating-label">
     <span class="input-label">*Name</span>
     <input type="text" placeholder="*Name" ng-model="form.name" name="name" required>
   </label>
+
   <label class="item item-input item-floating-label">
     <span class="input-label">*Phone<br><small class="input-invalid-message" ng-show="ACC.createContactForm.phone.$invalid"><sub>*must contain a min of 10 digits!</sub></small></span>
     <input type="tel" placeholder="*Phone" ng-model="form.phone" name="phone" ng-minlength="10" required>
     <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
   </label>
 
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Contact email</span>
+  <label class="item item-input item-floating-label" id="add-contact-email-input">
+    <span class="input-label">Email</span>
     <input type="email" placeholder="Email" ng-model="form.email">
   </label>
+
   <div class="list">
     <label class="item item-input item-select">
       <div class="input-label">
@@ -31,10 +34,10 @@
       <div class="input-label">
         How often should KiT remind you?
       </div>
-      <select name="freq" ng-model="form.freq">
+      <select name="freq" ng-model="form.freq" required>
         <option ng-model="form.freq" value="7">Weekly</option>
         <option ng-model="form.freq" value="14">Bi-Weekly</option>
-        <option ng-model="form.freq" value="30" selected>Monthly</option>
+        <option ng-model="form.freq" value="30">Monthly</option>
         <option ng-model="form.freq" value="90">Quarterly</option>
         <option ng-model="form.freq" value="180">Bi-Annually</option>
         <option ng-model="form.freq" value="365">Annually</option>
@@ -48,6 +51,9 @@
   </label>
 
   <button ng-click="CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block">Close</button>
-  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
-  <h5 ng-show="ACC.createContactForm.phone.$invalid || ACC.createContactForm.name.$invalid">Did you remember all required(*) fields?</h5>
+  <button id="add-contact-button" ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block ion-plus-round" ng-disabled="ACC.createContactForm.$invalid">Add</button>
+  <small style="position: relative; left: 5.5em" ng-show="ACC.createContactForm.phone.$invalid || ACC.createContactForm.name.$invalid">Did you remember all required(*) fields?</small>
+
+  <!-- Kristin's button -->
+  <!-- <button id="add-contact-button" ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block ion-plus-round" ng-disabled="ACC.createContactForm.$invalid"> Add</button> -->
 </form>
