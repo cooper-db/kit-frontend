@@ -1,12 +1,11 @@
 <ion-view>
   <ion-nav-title>
-    <!-- <img src="img/KiTlogo.png" style="width:15%;color:white;float:right;" /> -->
     <h1 style="color:white;font-family:'Londrina Outline',cursive">KiT</h1>
   </ion-nav-title>
   <ion-content class="padding home">
-    <div ng-show="HC.loginView.show">
+    <div ng-show="HC.loginView.show" style="text-align:center">
       <h1 class="headline">KiT</h1>
-      <hr>
+      <img src="img/KiTlogo.png" style="width:80%;color:white;text-align"/>
       <h3 class="byline">Keep in Touch</h3>
       <a class="button button-stable button-block signin" href="#/tab/account">Sign in to get started.</a>
     </div>
@@ -14,7 +13,7 @@
       <h1 style="color:white;text-align:center">Uh oh! It looks like you haven't added any contacts yet.</h1>
       <p style="color:white;text-align:center">Go ahead and add some from the 'contacts' tab.</p>
     </div>
-    <div ng-hide="HC.loginView.show || HC.contacts.length === 0">
+    <div ng-hide="HC.loginView.show || HC.contacts.length === 0 || HC.suggestions.length === 0">
       <h2 style="text-align:center;color:white">Let's get in touch with:</h2>
       <h1 style="text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:7em">{{HC.contacts.randomContact.name}}</h1>
       <h1 style="text-align:center;color:white">Today!</h1>
@@ -26,7 +25,10 @@
       <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.notes}}</h3>
       <hr>
       <button class="button button-block button-stable button-large" ng-click="HC.contacts.updateLastContact()">Did it!</button>
-      <button class="button button-block button-stable button-large" ng-click="HC.contacts.getRandomContact()">Another</button>
+      <button class="button button-block button-stable button-large" ng-show="HC.suggestions.length > 0" ng-click="HC.contacts.getRandomContact()">Another</button>
+    </div>
+    <div ng-show="HC.suggestions.current">
+        <h2 style="color:white;text-align:center">You're current! - There are no remaining suggestions.</h2>
     </div>
     <ka-contact-suggestion></ka-contact-suggestion>
   </ion-content>

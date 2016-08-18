@@ -5,14 +5,15 @@
 
 .headline {
   font-family: 'Londrina Outline', cursive;
-  font-size: 20em;
+  font-size: 15em;
+  line-height: .8;
   text-align: center;
   color:white;
 }
 
 .byline {
   font-family: 'Londrina Outline', cursive;
-  font-size: 5em;
+  font-size: 4em;
   color:white;
   text-align:center;
 

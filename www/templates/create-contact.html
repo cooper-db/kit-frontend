@@ -47,6 +47,6 @@
     <input type="text" placeholder="notes" ng-model="form.notes">
   </label>
 
-  <button ng-click="CC.showAddContactForm = !CC.showAddContactForm" class="button button-stable button-block">Close</button>
+  <button ng-click="CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block">Close</button>
   <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
 </form>

@@ -10,9 +10,11 @@ angular.module('KitApp.controllers', [])
 
   vm.contacts = ContactService.contacts;
 
+  vm.suggestions = ContactService.possibleSuggestions;
+
 }])
 
-.controller('AccountController', ['LoginService', 'SignupService', '$location', '$window', function(LoginService, SignupService, $location, $window) {
+.controller('AccountController', ['LoginService', 'SignupService', function(LoginService, SignupService) {
 
   var vm = this;
 
@@ -52,10 +54,13 @@ angular.module('KitApp.controllers', [])
 
 }])
 
+
 .controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', '$window', function(ContactService, LoginService, $cordovaContacts, $window ) {
   var vm = this;
 
   vm.contacts = ContactService.contacts;
+
+  vm.editContact = ContactService.editContact;
 
   vm.message = ContactService.message;
 
@@ -64,6 +69,8 @@ angular.module('KitApp.controllers', [])
   var id = $window.sessionStorage.id;
 
   vm.showAddContactForm = false;
+
+
   var isIOS = ionic.Platform.isIOS();
   //Works
   vm.getContacts = function() {
@@ -81,25 +88,18 @@ angular.module('KitApp.controllers', [])
         //  alert("Added Contact");
        }
 
-
-
      });
    };
 
+   vm.setPristine = function(){
+     console.log('setting pristine');
+     vm.editContactForm.$setPristine();
+   };
 
-  // vm.contacts.arr[i].showForm = false;
-
-
-
-  // vm.showForm = false;
-  //
-  // vm.showInfo = function() {
-  //   if(!vm.showForm) {
-  //     vm.showForm = true;
-  //   } else {
-  //     vm.showForm = false;
-  //   }
-  // }
+  //  vm.showArrowUp = ContactService.showArrowUp;
+  //  vm.showArrow = ContactService.showArrow;
+   //
+  //  vm.showArrowFunc = ContactService.showArrowFunc;
 
 }])
 
@@ -110,6 +110,8 @@ angular.module('KitApp.controllers', [])
     console.log('wat the hell');
     ContactService.addContact(name, phone, email, relationship, freq, notes);
   };
+
+  // vm.setPristine = ContactService.setPristine;
 
   vm.setPristine = function(){
     console.log('setting pristine');
