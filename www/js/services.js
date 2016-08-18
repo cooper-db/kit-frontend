@@ -29,12 +29,11 @@ angular.module('KitApp.services', [])
 
   vm.getContacts = ContactService.getContacts;
 
-  vm.contacts;
+  vm.errors = {};
 
   vm.login = function(username, password) {
     $http.post(routeToAPI.url + '/auth/login', {username: username, password: password})
     .then(function(response) {
-      console.log(response);
       $window.sessionStorage.token = response.data.token;
       vm.loginView.show = false;
       $window.sessionStorage.id = response.data.id;
@@ -42,10 +41,9 @@ angular.module('KitApp.services', [])
       $location.path('/tab/home');
     })
     .catch(function(err) {
-      console.log(err);
+      vm.errors.message = err.data.message;
       delete $window.sessionStorage.token;
       vm.loginView.show = true;
-      vm.errors.message = err;
     });
   };
 
@@ -67,7 +65,7 @@ angular.module('KitApp.services', [])
       console.log(response);
       $window.sessionStorage.token = response.data.token;
       $window.sessionStorage.id = response.data.id;
-      $location.path('/tab/home');
+      $location.path('/tab/contacts');
     })
     .catch(function(err) {
       for (let i = 0; i < err.data.length; i++){
@@ -81,7 +79,7 @@ angular.module('KitApp.services', [])
 .service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
   var sv = this;
 
-  sv.contacts = {};
+  sv.contacts = {length: 0};
   sv.addContactForm =   {};
 
   sv.getContacts = function(id) {
@@ -89,16 +87,12 @@ angular.module('KitApp.services', [])
     $http.get(routeToAPI.url + '/users/' + id + '/contacts')
       .then(function(response) {
 
-        console.log('getContacts response: ', response.data);
-
         sv.contacts.arr = response.data;
 
         sv.contacts.length = response.data.length;
 
         //add showFormFunc method
         for (var i = 0; i < sv.contacts.arr.length; i++) {
-          console.log(sv.contacts.arr[i]);
-
           sv.contacts.arr[i].showForm = false;
           sv.contacts.arr[i].showFormFunc = function() {
             if(this.showForm === true) {
@@ -186,6 +180,7 @@ angular.module('KitApp.services', [])
     .then(function(response){
       console.log('successfully posted a new contact');
       console.log(response.data);
+      sv.getContacts();
     })
     .catch(function(err){
       console.log('posting new contact didn\'t work');
