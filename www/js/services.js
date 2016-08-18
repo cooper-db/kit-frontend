@@ -68,7 +68,7 @@ angular.module('KitApp.services', [])
       $location.path('/tab/contacts');
     })
     .catch(function(err) {
-      for (let i = 0; i < err.data.length; i++){
+      for (var i = 0; i < err.data.length; i++){
         vm.errors.push(err.data[i].message);
         console.log(err.data[i].message);
       }

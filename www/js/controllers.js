@@ -128,7 +128,7 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('AddContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
+.controller('AddContactController', ['ContactService', function(ContactService) {
   var vm = this;
   //vm.addContact = ContactService.addContact;
   vm.addContact = function(name, phone, email, relationship, freq, notes){
