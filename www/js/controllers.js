@@ -107,12 +107,15 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('AddContactController', ['ContactService', function(ContactService) {
+.controller('AddContactController', ['ContactService', '$window', function(ContactService, $window) {
   var vm = this;
-  //vm.addContact = ContactService.addContact;
+
+  var id = $window.sessionStorage.id;
+
   vm.addContact = function(name, phone, email, relationship, freq, notes){
     console.log('wat the hell');
     ContactService.addContact(name, phone, email, relationship, freq, notes);
+    ContactService.getContacts(id);
   };
 
   // vm.setPristine = ContactService.setPristine;
