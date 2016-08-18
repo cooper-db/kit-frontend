@@ -43,7 +43,9 @@ span.tab-title {
 span.default-title {
   color:white;
 }
-
+#add-contact-email-input {
+  margin-bottom: 1.3em;
+}
 #create-contact-form input {
   color: white;
 }
