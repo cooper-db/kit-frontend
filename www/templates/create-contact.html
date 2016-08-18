@@ -48,5 +48,5 @@
   </label>
 
   <button ng-click="CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block">Close</button>
-  <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
+  <button id="add-contact-button" ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); CC.showAddContactForm = !CC.showAddContactForm; ACC.setPristine(); form = {}" class="button button-stable button-block ion-plus-round" ng-disabled="ACC.createContactForm.$invalid"> Add</button>
 </form>
