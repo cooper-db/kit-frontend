@@ -33,6 +33,23 @@ angular.module('KitApp.controllers', [])
     vm.loginView.show = false;
   };
 
+  vm.resetForm = {
+    show: false
+  };
+
+  vm.resetFormToggle = function() {
+    if (vm.resetForm.show === false) {
+      vm.resetForm.show = true;
+    } else {
+      vm.resetForm.show = false;
+    }
+  };
+
+  vm.resetPassword = function(newPassword) {
+    SignupService.resetPassword(newPassword);
+    vm.resetResponse = SignupService.resetResponse;
+  };
+
 }])
 
 .controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', function(ContactService, LoginService, $cordovaContacts ) {
