@@ -28,7 +28,6 @@
       <button class="button button-block button-stable button-large" ng-click="HC.contacts.updateLastContact()">Did it!</button>
       <button class="button button-block button-stable button-large" ng-show="HC.suggestions.length > 0" ng-click="HC.contacts.getRandomContact()">Another</button>
     </div>
-    <p style="text-align:center;color:white">Status of Current is: {{HC.suggestions.current}}</p>
     <div ng-show="HC.suggestions.current">
         <h2 style="color:white;text-align:center">You're current! - There are no remaining suggestions.</h2>
     </div>
