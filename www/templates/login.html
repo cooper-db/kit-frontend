@@ -7,7 +7,7 @@
     <span class="input-label">Password</span>
     <input type="password" placeholder="Password" ng-model="password">
   </label>
-  <p>{{AC.error}}</p>
+  <p style="color:red;text-align:center">{{AC.loginErrors.message}}</p>
   <button class="button button-block button-stable" ng-click="AC.login(username, password)">Login</button>
   <a href="#/tab/account/signup" class="button button-block button-stable">Signup</a>
 </div>

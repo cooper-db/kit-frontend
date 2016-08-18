@@ -7,12 +7,12 @@
   <ion-content class="padding contact">
 
     <!-- Jimmy's contact button -->
-    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getContacts()"> Get Contact </button>
-    <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm"> Add Contact </button>
+    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getContacts()" ng-disabled="CC.loginView.show"> Get Contact </button>
+    <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>
 
     <ka-add-contact ng-show="CC.showAddContactForm"></ka-add-contact>
 
-    <ul class="list">
+    <ul class="list" ng-hide="CC.loginView.show">
       <div ng-repeat="contact in CC.contacts.arr">
         <li class="item">
           <h2 ng-click="contact.showFormFunc()">{{contact.name}}</h2>

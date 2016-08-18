@@ -18,6 +18,8 @@ angular.module('KitApp.controllers', [])
 
   vm.loginView = LoginService.loginView;
   vm.errors = SignupService.errors;
+  vm.loginErrors = LoginService.errors;
+
   vm.login = function(username, password) {
     LoginService.login(username, password);
   };
@@ -33,12 +35,14 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('ContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
+.controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', function(ContactService, LoginService, $cordovaContacts ) {
   var vm = this;
 
   vm.contacts = ContactService.contacts;
 
   vm.message = ContactService.message;
+
+  vm.loginView = LoginService.loginView;
 
   vm.showAddContactForm = false;
   var isIOS = ionic.Platform.isIOS();
