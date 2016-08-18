@@ -10,6 +10,8 @@ angular.module('KitApp.controllers', [])
 
   vm.contacts = ContactService.contacts;
 
+  vm.suggestions = ContactService.possibleSuggestions;
+
 }])
 
 .controller('AccountController', ['LoginService', 'SignupService', '$location', '$window', function(LoginService, SignupService, $location, $window) {

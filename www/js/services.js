@@ -81,6 +81,7 @@ angular.module('KitApp.services', [])
 
   sv.contacts = {length: 0};
   sv.addContactForm =   {};
+  sv.possibleSuggestions = [];
 
   sv.getContacts = function(id) {
     id = $window.sessionStorage.id;
@@ -134,9 +135,8 @@ angular.module('KitApp.services', [])
 
         sv.contacts.getRandomContact = function() {
           $state.reload();
-
+          sv.possibleSuggestions.length = 0;
           var allContacts = this.arr;
-          var possibleSuggestions = [];
           var currentDate = new Date();
 
           for (var i = 0; i < allContacts.length; i++) {
@@ -144,14 +144,15 @@ angular.module('KitApp.services', [])
               var freq = allContacts[i].frequency_of_contact;
               var modifier = last.getDate() + freq;
               var next = last.setDate(modifier);
-
               if (next < currentDate) {
-                  possibleSuggestions.push(allContacts[i]);
-                  console.log('Added: ', allContacts[i].name, ' to possibleSuggestions.');
+                  sv.possibleSuggestions.push(allContacts[i]);
               }
           }
-          var randInt = Math.floor(Math.random() * (possibleSuggestions.length));
-          this.randomContact = possibleSuggestions[randInt];
+          if (sv.possibleSuggestions.length > 0) {
+              var randInt = Math.floor(Math.random() * (sv.possibleSuggestions.length));
+              this.randomContact = sv.possibleSuggestions[randInt];
+          }
+          sv.possibleSuggestions.current = !sv.possibleSuggestions.length;
         };
 
         sv.contacts.getRandomContact();
@@ -160,6 +161,9 @@ angular.module('KitApp.services', [])
           this.randomContact.last_contact =  new Date();
           $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + this.randomContact.id, this.randomContact)
           .then(function() {
+              $state.reload();
+              sv.contacts.getRandomContact();
+              sv.possibleSuggestions.current = !sv.possibleSuggestions.length;
             sv.contacts.showAlert();
           })
           .catch(function(err) {
@@ -173,7 +177,7 @@ angular.module('KitApp.services', [])
             template: 'Feel free to stop for the day, or keep going!'
           });
           alertPopup.then(function(res) {
-            console.log(res);
+            console.log('Show Alert is: ', res);
           });
         };
       })
