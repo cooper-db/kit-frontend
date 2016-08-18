@@ -105,11 +105,11 @@ angular.module('KitApp.services', [])
   sv.addContactForm =   {};
   sv.possibleSuggestions = [];
 
-  sv.editContact = function(name, phone, email, relationship, freq, notes, contactId) {
+  sv.editContact = function(name, phone, email, relationship, freq, notes, last_contact, contactId) {
     var id = $window.sessionStorage.id;
-    console.log(name, phone, email, relationship, freq, notes);
+    console.log(name, phone, email, relationship, freq, notes, last_contact);
 
-    $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + contactId, {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
+    $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + contactId, {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes, last_contact:last_contact})
     .then(function(response) {
       console.log('edit contact reponse: ', response);
       sv.getContacts(id);
