@@ -82,7 +82,7 @@
               <input type="text" placeholder="notes" ng-model="form.notes" value="form.notes">
             </label>
 
-            <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Close</button>
+            <button ng-click="contact.showEditFormFunc(); CC.setPristine(); form = {}" class="button button-stable button-block">Close</button>
             <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, contact.id); CC.setPristine(); form = {}" class="button button-stable button-block">Edit Contact</button>
           </form>
         </li>
