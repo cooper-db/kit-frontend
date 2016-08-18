@@ -28,18 +28,17 @@
               <button ng-click="contact.showEditFormFunc()" class="button ion-edit"> Edit </button>
               <button ng-click="contact.deleteContact()" class="button ion-trash-a"> Remove </button>
             </p>
-            <!-- Edit form goes here with ng-show="showEdit" -->
-
           </div>
 
-          <form ng-show="contact.showEditForm" id="edit-contact-form" novalidate>
+          <!-- Edit form goes here with ng-show="showEdit" -->
+          <form name="CC.editContactForm" ng-show="contact.showEditForm" id="edit-contact-form" novalidate>
             <label class="item item-input item-floating-label">
               <span class="input-label">Name</span>
-              <input type="text" placeholder="Name" ng-model="form.name" value="contact.name" required>
+              <input type="text" placeholder="Name" ng-model="form.name" ng-init="{{contact.name}}" required>
             </label>
             <label class="item item-input item-floating-label">
               <span class="input-label">Phone</span>
-              <input type="tel" placeholder="phone" ng-model="form.phone" ng-minlength="10" required>
+              <input type="tel" placeholder="phone" ng-model="form.phone" ng-minlength="10" value="contact.phone" required>
               <p><sub>(Note: KiT stores phone numbers exactly as you input them.)</sub></p>
             </label>
 
@@ -82,7 +81,9 @@
             </label>
 
             <button ng-click="contact.showEditFormFunc()" class="button button-stable button-block">Close</button>
-            <button ng-click="ACC.addContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="ACC.createContactForm.$invalid">Add</button>
+
+            <!-- TODO: -->
+            <button ng-click="contact.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="CC.editContactForm.$invalid">Edit Contact</button>
           </form>
 
 
