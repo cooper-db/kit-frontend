@@ -51,11 +51,12 @@ span.default-title {
 }
 
 #edit-contact-form {
-  color: black;
+  position:relative;
+  top: 2em;
 }
 
 .input-invalid-message {
-  color: red;
+  color: gray;
 }
 .input-valid-message {
   color: green;

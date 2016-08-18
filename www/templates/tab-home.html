@@ -1,6 +1,7 @@
 <ion-view>
   <ion-nav-title>
-    <h1 style="color:white;font-family:'Londrina Outline',cursive;">KiT</h1>
+    <!-- <img src="img/KiTlogo.png" style="width:15%;color:white;float:right;" /> -->
+    <h1 style="color:white;font-family:'Londrina Outline',cursive">KiT</h1>
   </ion-nav-title>
   <ion-content class="padding home">
     <div ng-show="HC.loginView.show">
@@ -14,7 +15,7 @@
       <p style="color:white;text-align:center">Go ahead and add some from the 'contacts' tab.</p>
     </div>
     <div ng-hide="HC.loginView.show || HC.contacts.length === 0 || HC.suggestions.length === 0">
-      <h2 style="text-align:center;color:white">Let's get in touch with . . .</h2>
+      <h2 style="text-align:center;color:white">Let's get in touch with:</h2>
       <h1 style="text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:7em">{{HC.contacts.randomContact.name}}</h1>
       <h1 style="text-align:center;color:white">Today!</h1>
       <hr>

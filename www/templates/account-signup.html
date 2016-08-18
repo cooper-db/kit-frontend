@@ -12,18 +12,15 @@
 
         <label class="item item-input item-floating-label">
           <span class="input-label">Password</span>
-          <input type="password" placeholder="Password" name="password" ng-model="user.password" ng-minlength=8 required password-validation>
-          <small class="input-invalid-message" ng-show="signupForm.password.$invalid && signupForm.password.$dirty">password should be at least 8 letters</small><br>
-          <small class="input-invalid-message" ng-show="signupForm.password.$invalid && signupForm.password.$dirty">use at least one number and one special char</small>
-          <small class="input-valid-message" ng-show="signupForm.password.$valid && signupForm.password.$dirty">password looks great!</small>
+          <input type="password" placeholder="Password" name="password" ng-model="user.password" ng-minlength="8" required password-validation>
+          <small class="input-invalid-message" ng-show="signupForm.password.$invalid">*minimum 8 characters, with at least <br>one number and one special character</small>
+          <small class="input-valid-message" ng-show="signupForm.password.$valid && signupForm.password.$dirty">awesome password, {{ user.username }}</small>
         </label>
-
-
 
         <label class="item item-input item-floating-label">
           <span class="input-label">Confirm Password</span>
           <input type="password" placeholder="Confirm Password" name="confirmPassword" ng-model="user.confirmPassword" required compare-to="user.password" />
-          <small id="passwords-match-message" ng-show="user.password === user.confirmPassword && signupForm.password.$valid">passwords match!</small>
+          <small id="passwords-match-message" ng-show="user.password === user.confirmPassword && signupForm.password.$valid">passwords match</small>
         </label>
         <button type="submit" class="button button-stable button-block" ng-disabled="signupForm.$invalid">Create Account</button>
       </form>
