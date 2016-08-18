@@ -68,14 +68,10 @@ angular.module('KitApp.services', [])
       $location.path('/tab/home');
     })
     .catch(function(err) {
-<<<<<<< HEAD
-      console.log(err);
-=======
       for (var i = 0; i < err.data.length; i++){
         vm.errors.push(err.data[i].message);
         console.log(err.data[i].message);
       }
->>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
     });
   };
 
@@ -187,15 +183,7 @@ angular.module('KitApp.services', [])
 
         sv.contacts.getRandomContact = function() {
           $state.reload();
-<<<<<<< HEAD
-          var input = this.arr;
-          var randInt = Math.floor(Math.random() * (input.length));
-          // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
-          // var freq = input[randInt].frequency_of_contact * 86164;
-          // var now = Date.now() / 1000;
-          // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
-          this.randomContact = input[randInt];
-=======
+
           sv.possibleSuggestions.length = 0;
           var allContacts = this.arr;
           var currentDate = new Date();
@@ -214,7 +202,6 @@ angular.module('KitApp.services', [])
               this.randomContact = sv.possibleSuggestions[randInt];
           }
           sv.possibleSuggestions.current = !sv.possibleSuggestions.length;
->>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
         };
 
         sv.contacts.getRandomContact();
