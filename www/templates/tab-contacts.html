@@ -48,7 +48,7 @@
 
             <label class="item item-input item-floating-label">
               <span class="input-label">Email</span>
-              <input type="email" placeholder="email" value="form.phone" ng-model="form.email">
+              <input type="email" placeholder="email" ng-model="form.email">
             </label>
             <div class="list">
               <label class="item item-input item-select">
@@ -68,7 +68,7 @@
                 <div class="input-label">
                   Call frequency
                 </div>
-                <select name="freq" ng-model="form.freq" value={{form.freq}}>
+                <select name="freq" ng-model="form.freq" value="{{form.freq}}">
                   <option value="7">Weekly</option>
                   <option value="14">Bi-Weekly</option>
                   <option value="30" >Monthly</option>
@@ -82,9 +82,12 @@
               <span class="input-label">Notes</span>
               <input type="text" placeholder="notes" ng-model="form.notes" value="form.notes">
             </label>
-
-            <button ng-click="contact.showEditFormFunc(); CC.setPristine(); form = {}" class="button button-stable button-block">Close</button>
-            <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, contact.id); CC.setPristine(); form = {}" class="button button-stable button-block">Edit Contact</button>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Last Contacted</span>
+              <input type="date" placeholder="last contacted" ng-model="form.last_contact">
+            </label>
+            <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Close</button>
+            <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, form.last_contact, contact.id); CC.setPristine(); form = {}" class="button button-stable button-block">Edit Contact</button>
           </form>
         </li>
   </div>
