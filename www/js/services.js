@@ -57,16 +57,16 @@ angular.module('KitApp.services', [])
 
 }])
 
-.service('SignupService', ['$http', '$location', '$window', 'routeToAPI', function($http, $location, $window, routeToAPI) {
+.service('SignupService', ['$http', '$location', '$window', '$ionicHistory', 'routeToAPI', function($http, $location, $window, $ionicHistory, routeToAPI) {
   var vm = this;
   vm.errors =[];
   vm.signup = function(user) {
     $http.post(routeToAPI.url + '/auth/signup', {username: user.username, password: user.password})
     .then(function(response){
-      console.log(response);
       $window.sessionStorage.token = response.data.token;
       $window.sessionStorage.id = response.data.id;
-      $location.path('/tab/home');
+      $ionicHistory.goBack();
+      $location.path('/tab/contacts');
     })
     .catch(function(err) {
       console.log(err.data.message);
