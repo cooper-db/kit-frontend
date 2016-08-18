@@ -51,5 +51,6 @@ span.default-title {
 }
 
 #edit-contact-form {
-  color: black;
+  position:relative;
+  top: 2em;
 }
