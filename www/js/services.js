@@ -178,6 +178,19 @@ angular.module('KitApp.services', [])
               }
             };
 
+            //display up / down arrow depending on if information is displayed
+            sv.contacts.arr[i].showArrowUp = false;
+            sv.contacts.arr[i].showArrow = true;
+
+            sv.contacts.arr[i].showArrowFunc = function() {
+              if(this.showArrow === true) {
+                this.showArrow = false;
+                this.showArrowUp = true;
+              } else {
+                this.showArrow = true;
+                this.showArrowUp = false;
+              }
+            }
 
         }
 
@@ -250,6 +263,7 @@ angular.module('KitApp.services', [])
       console.log(err);
     });
   };
+
 }])
 
 .service('authInterceptor', ['$q', '$window', function($q, $window) {
