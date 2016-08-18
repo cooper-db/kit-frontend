@@ -7,15 +7,15 @@ angular.module('KitApp.services', [])
 
 //commment IN to hit LIVE HEROKU HOSTED DATABASE!
 //p.s. - you'll need to comment out the constant BELOW this one too!
-// .constant("routeToAPI", {
-//         "url": "https://keep-intouch.herokuapp.com",
-//     })
+.constant("routeToAPI", {
+        "url": "https://keep-intouch.herokuapp.com",
+    })
 
 // //comment IN to hit LOCALLY HOSTED DATABASE!
 // //p.s. - you'll need to comment out the constant ABOVE this one too!
-.constant("routeToAPI", {
-        "url": "http://localhost:3000",
-    })
+// .constant("routeToAPI", {
+//         "url": "http://localhost:3000",
+//     })
 //-----------------------------------------------------------------------------
 
 .service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
@@ -103,7 +103,7 @@ angular.module('KitApp.services', [])
             }
           };
 
-          sv.contacts.arr[i].deleteContact = function() {gi
+          sv.contacts.arr[i].deleteContact = function() {
             var thisContact = this;
             var contactId = this.id;
             //remove contact from sv.contacts.arr
@@ -136,13 +136,29 @@ angular.module('KitApp.services', [])
 
         sv.contacts.getRandomContact = function() {
           $state.reload();
-          var input = this.arr;
-          var randInt = Math.floor(Math.random() * (input.length));
-          // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
-          // var freq = input[randInt].frequency_of_contact * 86164;
-          // var now = Date.now() / 1000;
-          // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
-          this.randomContact = input[randInt];
+
+          var allContacts = this.arr;
+          var possibleSuggestions = [];
+          var currentDate = new Date();
+
+          for (var i = 0; i < allContacts.length; i++) {
+              console.log('Checking for possible suggestions!\n', i);
+              var last = new Date(allContacts[i].last_contact);
+              console.log(last);
+              var freq = allContacts[i].frequency_of_contact;
+              console.log(freq);
+              var modifier = last.getDate() + freq;
+              console.log(modifier);
+              var next = last.setDate(modifier);
+              console.log(next);
+
+              if (next < currentDate) {
+                  possibleSuggestions.push(allContacts[i]);
+                  console.log('Added: ', allContacts[i].name, ' to possibleSuggestions.');
+              }
+          }
+          var randInt = Math.floor(Math.random() * (possibleSuggestions.length));
+          this.randomContact = possibleSuggestions[randInt];
         };
 
         sv.contacts.getRandomContact();
