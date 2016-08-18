@@ -12,7 +12,7 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('AccountController', ['LoginService', 'SignupService', '$location', '$window', function(LoginService, SignupService, $location, $window) {
+.controller('AccountController', ['LoginService', 'SignupService', function(LoginService, SignupService) {
 
   var vm = this;
 
