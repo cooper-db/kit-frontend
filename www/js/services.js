@@ -125,7 +125,7 @@ angular.module('KitApp.services', [])
     // var contactId = this.id;
     //remove contact from sv.contacts.arr
     // sv.contacts.arr.splice(sv.contacts.arr.indexOf(thisContact));
-    $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+    $http.delete(routeToAPI.url + '/users/' + id + '/contacts/' + contactId)
     .then(function(response) {
       console.log('DELETE CONTACT RESPONSE: ', response);
       sv.getContacts(id);
@@ -215,7 +215,7 @@ angular.module('KitApp.services', [])
                 this.showArrow = true;
                 this.showArrowUp = false;
               }
-            }
+          };
 
         }
 
@@ -278,7 +278,7 @@ angular.module('KitApp.services', [])
   sv.addContact = function(name, phone, email, relationship, freq, notes){
     var id = $window.sessionStorage.id;
     console.log(name, phone, email, relationship, freq, notes);
-    $http.post(routeToAPI.url + '/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
+    $http.post(routeToAPI.url + '/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq || 90, notes:notes})
     .then(function(response){
       console.log('successfully posted a new contact');
       console.log(response.data);
