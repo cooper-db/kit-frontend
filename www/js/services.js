@@ -140,15 +140,10 @@ angular.module('KitApp.services', [])
           var currentDate = new Date();
 
           for (var i = 0; i < allContacts.length; i++) {
-              console.log('Checking for possible suggestions!\n', i);
               var last = new Date(allContacts[i].last_contact);
-              console.log(last);
               var freq = allContacts[i].frequency_of_contact;
-              console.log(freq);
               var modifier = last.getDate() + freq;
-              console.log(modifier);
               var next = last.setDate(modifier);
-              console.log(next);
 
               if (next < currentDate) {
                   possibleSuggestions.push(allContacts[i]);
