@@ -34,7 +34,7 @@
           <form name="CC.editContactForm" ng-show="contact.showEditForm" id="edit-contact-form" novalidate>
             <label class="item item-input item-floating-label">
               <span class="input-label">Name</span>
-              <input type="text" placeholder="Name" ng-model="form.name" ng-init="{{contact.name}}" required>
+              <input type="text" placeholder="Name" ng-model="form.name" required>
             </label>
             <label class="item item-input item-floating-label">
               <span class="input-label">Phone</span>
@@ -80,10 +80,10 @@
               <input type="text" placeholder="notes" ng-model="form.notes">
             </label>
 
-            <button ng-click="contact.showEditFormFunc()" class="button button-stable button-block">Close</button>
+            <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Close</button>
 
             <!-- TODO: -->
-            <button ng-click="contact.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes); ACC.setPristine(); form = {}" class="button button-stable button-block" ng-disabled="CC.editContactForm.$invalid">Edit Contact</button>
+            <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, contact.id); CC.setPristine(); form = {}" class="button button-stable button-block">Edit Contact</button>
           </form>
 
 

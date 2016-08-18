@@ -7,15 +7,15 @@ angular.module('KitApp.services', [])
 
 //commment IN to hit LIVE HEROKU HOSTED DATABASE!
 //p.s. - you'll need to comment out the constant BELOW this one too!
-.constant("routeToAPI", {
-        "url": "https://keep-intouch.herokuapp.com",
-    })
+// .constant("routeToAPI", {
+//         "url": "https://keep-intouch.herokuapp.com",
+//     })
 
 // //comment IN to hit LOCALLY HOSTED DATABASE!
 // //p.s. - you'll need to comment out the constant ABOVE this one too!
-// .constant("routeToAPI", {
-//         "url": "http://localhost:3000",
-//     })
+.constant("routeToAPI", {
+        "url": "http://localhost:3000",
+    })
 //-----------------------------------------------------------------------------
 
 .service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
@@ -29,11 +29,12 @@ angular.module('KitApp.services', [])
 
   vm.getContacts = ContactService.getContacts;
 
-  vm.errors = {};
+  vm.contacts;
 
   vm.login = function(username, password) {
     $http.post(routeToAPI.url + '/auth/login', {username: username, password: password})
     .then(function(response) {
+      console.log(response);
       $window.sessionStorage.token = response.data.token;
       vm.loginView.show = false;
       $window.sessionStorage.id = response.data.id;
@@ -41,9 +42,10 @@ angular.module('KitApp.services', [])
       $location.path('/tab/home');
     })
     .catch(function(err) {
-      vm.errors.message = err.data.message;
+      console.log(err);
       delete $window.sessionStorage.token;
       vm.loginView.show = true;
+      vm.errors.message = err;
     });
   };
 
@@ -57,42 +59,57 @@ angular.module('KitApp.services', [])
 
 .service('SignupService', ['$http', '$location', '$window', 'routeToAPI', function($http, $location, $window, routeToAPI) {
   var vm = this;
-  vm.errors = [];
-
   vm.signup = function(user) {
     $http.post(routeToAPI.url + '/auth/signup', {username: user.username, password: user.password})
     .then(function(response){
       console.log(response);
       $window.sessionStorage.token = response.data.token;
       $window.sessionStorage.id = response.data.id;
-      $location.path('/tab/contacts');
+      $location.path('/tab/home');
     })
     .catch(function(err) {
-      for (let i = 0; i < err.data.length; i++){
-        vm.errors.push(err.data[i].message);
-        console.log(err.data[i].message);
-      }
+      console.log(err);
     });
   };
 }])
 
-.service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI) {
+.service('ContactService', ['$http', '$state', '$ionicPopup', '$window', '$cordovaContacts', 'routeToAPI', '$location', function($http, $state, $ionicPopup, $window, $cordovaContacts, routeToAPI, $location) {
   var sv = this;
 
-  sv.contacts = {length: 0};
+  sv.contacts = {};
   sv.addContactForm =   {};
 
+  sv.editContact = function(name, phone, email, relationship, freq, notes, contactId) {
+    var id = $window.sessionStorage.id;
+    console.log(name, phone, email, relationship, freq, notes);
+
+    $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + contactId, {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
+    .then(function(response) {
+      console.log('edit contact reponse: ', response);
+      sv.getContacts(id);
+      $location.path('/tab/contacts');
+    })
+    .catch(function(err) {
+      console.log('edit contact err: ', err);
+    });
+  };
+
   sv.getContacts = function(id) {
+    // sv.contacts.arr.length = 0;
+
     id = $window.sessionStorage.id;
     $http.get(routeToAPI.url + '/users/' + id + '/contacts')
       .then(function(response) {
+
+        console.log('getContacts response: ', response.data);
 
         sv.contacts.arr = response.data;
 
         sv.contacts.length = response.data.length;
 
-        //add showFormFunc method
         for (var i = 0; i < sv.contacts.arr.length; i++) {
+          // console.log(sv.contacts.arr[i]);
+
           sv.contacts.arr[i].showForm = false;
           sv.contacts.arr[i].showFormFunc = function() {
             if(this.showForm === true) {
@@ -117,6 +134,21 @@ angular.module('KitApp.services', [])
             });
           };
 
+          // sv.contacts.arr[i].editContact = function(name, phone, email, relationship, freq, notes) {
+          //   var id = $window.sessionStorage.id;
+          //   var contactId = this.id;
+          //
+          //   console.log(name, phone, email, relationship, freq, notes);
+          //   $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + contactId, {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes})
+          //   .then(function(response) {
+          //     console.log('edit contact reponse: ', response);
+          //
+          //   })
+          //   .catch(function(err) {
+          //     console.log('edit contact err: ', err);
+          //   });
+          // };
+
           //editContact function shows the form
             sv.contacts.arr[i].showEditForm = false;
             sv.contacts.arr[i].showEditFormFunc = function() {
@@ -134,24 +166,13 @@ angular.module('KitApp.services', [])
 
         sv.contacts.getRandomContact = function() {
           $state.reload();
-
-          var allContacts = this.arr;
-          var possibleSuggestions = [];
-          var currentDate = new Date();
-
-          for (var i = 0; i < allContacts.length; i++) {
-              var last = new Date(allContacts[i].last_contact);
-              var freq = allContacts[i].frequency_of_contact;
-              var modifier = last.getDate() + freq;
-              var next = last.setDate(modifier);
-
-              if (next < currentDate) {
-                  possibleSuggestions.push(allContacts[i]);
-                  console.log('Added: ', allContacts[i].name, ' to possibleSuggestions.');
-              }
-          }
-          var randInt = Math.floor(Math.random() * (possibleSuggestions.length));
-          this.randomContact = possibleSuggestions[randInt];
+          var input = this.arr;
+          var randInt = Math.floor(Math.random() * (input.length));
+          // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
+          // var freq = input[randInt].frequency_of_contact * 86164;
+          // var now = Date.now() / 1000;
+          // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
+          this.randomContact = input[randInt];
         };
 
         sv.contacts.getRandomContact();
@@ -191,7 +212,6 @@ angular.module('KitApp.services', [])
     .then(function(response){
       console.log('successfully posted a new contact');
       console.log(response.data);
-      sv.getContacts();
     })
     .catch(function(err){
       console.log('posting new contact didn\'t work');

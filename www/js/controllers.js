@@ -35,16 +35,20 @@ angular.module('KitApp.controllers', [])
 
 }])
 
-.controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', function(ContactService, LoginService, $cordovaContacts ) {
+.controller('ContactController', ['ContactService', 'LoginService', '$cordovaContacts', '$scope', function(ContactService, LoginService, $cordovaContacts, $scope) {
   var vm = this;
 
   vm.contacts = ContactService.contacts;
+
+  vm.editContact = ContactService.editContact;
 
   vm.message = ContactService.message;
 
   vm.loginView = LoginService.loginView;
 
   vm.showAddContactForm = false;
+
+
   var isIOS = ionic.Platform.isIOS();
   //Works
   vm.getContacts = function() {
@@ -90,25 +94,16 @@ angular.module('KitApp.controllers', [])
        }
 
 
+     vm.setPristine = function(){
+       console.log('setting pristine');
+       vm.editContactForm.$setPristine();
+     };
+
+
+
 
      });
    };
-
-
-  // vm.contacts.arr[i].showForm = false;
-
-
-
-  // vm.showForm = false;
-  //
-  // vm.showInfo = function() {
-  //   if(!vm.showForm) {
-  //     vm.showForm = true;
-  //   } else {
-  //     vm.showForm = false;
-  //   }
-  // }
-
 }])
 
 .controller('AddContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
@@ -118,6 +113,8 @@ angular.module('KitApp.controllers', [])
     console.log('wat the hell');
     ContactService.addContact(name, phone, email, relationship, freq, notes);
   };
+
+  // vm.setPristine = ContactService.setPristine;
 
   vm.setPristine = function(){
     console.log('setting pristine');
