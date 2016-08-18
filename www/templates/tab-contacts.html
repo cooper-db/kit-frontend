@@ -29,7 +29,7 @@
               <span class="ion-ios-time-outline"></span><small> Last contacted: <span am-time-ago="contact.last_contact">{{contact.last_contact}}</span></small></br>
 
               <button ng-click="contact.showEditFormFunc()" class="button ion-edit"> Edit </button>
-              <button ng-click="contact.deleteContact()" class="button ion-trash-a"> Remove </button>
+              <button ng-click="CC.deleteContact(contact.id)" class="button ion-trash-a"> Remove </button>
             </p>
           </div>
 
