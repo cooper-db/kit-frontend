@@ -93,17 +93,19 @@ angular.module('KitApp.controllers', [])
          //  console.log(result);
        }
 
-
-     vm.setPristine = function(){
-       console.log('setting pristine');
-       vm.editContactForm.$setPristine();
-     };
-
-
-
-
      });
    };
+
+   vm.setPristine = function(){
+     console.log('setting pristine');
+     vm.editContactForm.$setPristine();
+   };
+
+  //  vm.showArrowUp = ContactService.showArrowUp;
+  //  vm.showArrow = ContactService.showArrow;
+   //
+  //  vm.showArrowFunc = ContactService.showArrowFunc;
+
 }])
 
 .controller('AddContactController', ['ContactService', '$cordovaContacts', function(ContactService, $cordovaContacts ) {
