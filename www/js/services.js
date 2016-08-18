@@ -68,14 +68,10 @@ angular.module('KitApp.services', [])
       $location.path('/tab/home');
     })
     .catch(function(err) {
-<<<<<<< HEAD
-      console.log(err);
-=======
       for (var i = 0; i < err.data.length; i++){
         vm.errors.push(err.data[i].message);
         console.log(err.data[i].message);
       }
->>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
     });
   };
 
@@ -182,20 +178,25 @@ angular.module('KitApp.services', [])
               }
             };
 
+            //display up / down arrow depending on if information is displayed
+            sv.contacts.arr[i].showArrowUp = false;
+            sv.contacts.arr[i].showArrow = true;
+
+            sv.contacts.arr[i].showArrowFunc = function() {
+              if(this.showArrow === true) {
+                this.showArrow = false;
+                this.showArrowUp = true;
+              } else {
+                this.showArrow = true;
+                this.showArrowUp = false;
+              }
+            }
 
         }
 
         sv.contacts.getRandomContact = function() {
           $state.reload();
-<<<<<<< HEAD
-          var input = this.arr;
-          var randInt = Math.floor(Math.random() * (input.length));
-          // var lastContact = new Date(input[randInt].last_contact.substr(0,10)).getTime() / 1000;
-          // var freq = input[randInt].frequency_of_contact * 86164;
-          // var now = Date.now() / 1000;
-          // console.log('Now: ' + now + ' Last: ' + lastContact + ' Freq: ' + freq);
-          this.randomContact = input[randInt];
-=======
+
           sv.possibleSuggestions.length = 0;
           var allContacts = this.arr;
           var currentDate = new Date();
@@ -214,7 +215,6 @@ angular.module('KitApp.services', [])
               this.randomContact = sv.possibleSuggestions[randInt];
           }
           sv.possibleSuggestions.current = !sv.possibleSuggestions.length;
->>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
         };
 
         sv.contacts.getRandomContact();
@@ -263,6 +263,7 @@ angular.module('KitApp.services', [])
       console.log(err);
     });
   };
+
 }])
 
 .service('authInterceptor', ['$q', '$window', function($q, $window) {

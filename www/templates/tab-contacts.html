@@ -7,16 +7,19 @@
   <ion-content class="padding contact">
 
     <!-- Jimmy's contact button -->
-    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getContacts()" ng-disabled="CC.loginView.show"> Get Contact </button>
+    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getContacts()" ng-disabled="CC.loginView.show"> Import Contact from Phone </button>
     <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>
 
     <ka-add-contact ng-show="CC.showAddContactForm"></ka-add-contact>
 
     <ul class="list" ng-hide="CC.loginView.show">
       <div ng-repeat="contact in CC.contacts.arr">
-        <li class="item">
-          <h2 ng-click="contact.showFormFunc()">{{contact.name}}</h2>
-
+        <li class="item" >
+          <div ng-click="contact.showFormFunc()">
+            <h2 style="display: inline">{{contact.name}}</h2>
+            <span style="float: right" class="ion-chevron-down" ng-click="contact.showArrowFunc()" ng-show="contact.showArrow"></span>
+            <span style="float: right" class="ion-chevron-up" ng-click="contact.showArrowFunc()" ng-show="contact.showArrowUp"></span>
+          </div>
           <div ng-show="contact.showForm">
             <p>
               <span class="icon ion-ios-telephone-outline"></span> {{contact.phone}}</br>
@@ -34,11 +37,7 @@
           <form name="CC.editContactForm" ng-show="contact.showEditForm" id="edit-contact-form" ng-init="form.name=contact.name; form.phone=contact.phone; form.email=contact.email; form.relationship=contact.relationship; form.freq=contact.frequency_of_contact.toString(); form.notes=contact.notes" novalidate>
             <label class="item item-input item-floating-label">
               <span class="input-label">Name</span>
-<<<<<<< HEAD
               <input type="text" placeholder="Name" ng-model="form.name" value="form.name" required>
-=======
-              <input type="text" placeholder="Name" ng-model="form.name" ng-init="contact.name" required>
->>>>>>> a382f6dca4199d4ae42df4752e385091eeb75aa7
             </label>
             <label class="item item-input item-floating-label">
               <span class="input-label">Phone</span>
@@ -84,7 +83,6 @@
             </label>
 
             <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Close</button>
-
             <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, contact.id); CC.setPristine(); form = {}" class="button button-stable button-block">Edit Contact</button>
           </form>
         </li>
