@@ -7,15 +7,15 @@ angular.module('KitApp.services', [])
 
 //commment IN to hit LIVE HEROKU HOSTED DATABASE!
 //p.s. - you'll need to comment out the constant BELOW this one too!
-// .constant("routeToAPI", {
-//         "url": "https://keep-intouch.herokuapp.com",
-//     })
+.constant("routeToAPI", {
+        "url": "https://keep-intouch.herokuapp.com",
+    })
 
 // //comment IN to hit LOCALLY HOSTED DATABASE!
 // //p.s. - you'll need to comment out the constant ABOVE this one too!
-.constant("routeToAPI", {
-        "url": "http://localhost:3000",
-    })
+// .constant("routeToAPI", {
+//         "url": "http://localhost:3000",
+//     })
 //-----------------------------------------------------------------------------
 
 .service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
@@ -120,6 +120,22 @@ angular.module('KitApp.services', [])
     });
   };
 
+  sv.deleteContact = function(contactId) {
+    var id = $window.sessionStorage.id;
+    // var contactId = this.id;
+    //remove contact from sv.contacts.arr
+    // sv.contacts.arr.splice(sv.contacts.arr.indexOf(thisContact));
+    $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+    .then(function(response) {
+      console.log('DELETE CONTACT RESPONSE: ', response);
+      sv.getContacts(id);
+      $location.path('/tab/contacts');
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
+
   sv.getContacts = function(id) {
     // sv.contacts.arr.length = 0;
 
@@ -145,20 +161,20 @@ angular.module('KitApp.services', [])
             }
           };
 
-          sv.contacts.arr[i].deleteContact = function() {
-            var thisContact = this;
-            var contactId = this.id;
-            //remove contact from sv.contacts.arr
-            sv.contacts.arr.splice(sv.contacts.arr.indexOf(thisContact));
-            $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
-            .then(function(response) {
-              console.log(thisContact);
-              console.log(response);
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
-          };
+          // sv.contacts.arr[i].deleteContact = function() {
+          //   var thisContact = this;
+          //   var contactId = this.id;
+          //   //remove contact from sv.contacts.arr
+          //   sv.contacts.arr.splice(sv.contacts.arr.indexOf(thisContact));
+          //   $http.delete('http://localhost:3000/users/' + id + '/contacts/' + contactId)
+          //   .then(function(response) {
+          //     console.log(thisContact);
+          //     console.log(response);
+          //   })
+          //   .catch(function(err) {
+          //     console.log(err);
+          //   });
+          // };
 
           // sv.contacts.arr[i].editContact = function(name, phone, email, relationship, freq, notes) {
           //   var id = $window.sessionStorage.id;
