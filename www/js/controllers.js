@@ -82,12 +82,12 @@ angular.module('KitApp.controllers', [])
        if(isIOS == true){
          ContactService.addContact(result.name.formatted, result.phoneNumbers[0].value);
          ContactService.getContacts(id);
-         alert("Added Contact");
+        //  alert("Added Contact");
 
        } else {
          ContactService.addContact(result.name.formatted, result.phoneNumbers[0].value);
          ContactService.getContacts(id);
-         alert("Added Contact");
+        //  alert("Added Contact");
        }
 
      });
