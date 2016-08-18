@@ -62,6 +62,8 @@ angular.module('KitApp.controllers', [])
 
   vm.editContact = ContactService.editContact;
 
+    vm.deleteContact = ContactService.deleteContact;
+
   vm.message = ContactService.message;
 
   vm.loginView = LoginService.loginView;
