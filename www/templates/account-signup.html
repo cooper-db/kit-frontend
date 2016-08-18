@@ -19,6 +19,9 @@
         </label>
         <button type="submit" class="button button-stable button-block" ng-disabled="signupForm.$invalid">Create Account</button>
       </form>
+      <div ng-repeat="message in AC.errors">
+        {{message}}
+      </div>
     </div>
   </ion-content>
 </ion-view>
