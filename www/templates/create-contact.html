@@ -31,10 +31,10 @@
       <div class="input-label">
         How often should KiT remind you?
       </div>
-      <select name="freq" ng-model="form.freq">
+      <select name="freq" ng-model="form.freq" required>
         <option ng-model="form.freq" value="7">Weekly</option>
         <option ng-model="form.freq" value="14">Bi-Weekly</option>
-        <option ng-model="form.freq" value="30" selected>Monthly</option>
+        <option ng-model="form.freq" value="30">Monthly</option>
         <option ng-model="form.freq" value="90">Quarterly</option>
         <option ng-model="form.freq" value="180">Bi-Annually</option>
         <option ng-model="form.freq" value="365">Annually</option>
