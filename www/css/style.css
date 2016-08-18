@@ -55,7 +55,7 @@ span.default-title {
 }
 
 .input-invalid-message {
-  color: red;
+  color: gray;
 }
 .input-valid-message {
   color: green;

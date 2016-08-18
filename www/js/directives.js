@@ -61,9 +61,9 @@ angular.module('KitApp.directives', [])
       function myValidation(password) {
         console.log('password validation directive checking validity');
         if (password.match(/\W/g) && password.match(/\d/g)) {
-            mCtrl.$setValidity('charE', true);
+            mCtrl.$setValidity('password', true);
         } else {
-            mCtrl.$setValidity('charE', false);
+            mCtrl.$setValidity('password', false);
         }
         return password;
       }
