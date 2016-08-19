@@ -91,7 +91,7 @@ angular.module('KitApp.controllers', [])
 
   vm.editContact = ContactService.editContact;
 
-    vm.deleteContact = ContactService.deleteContact;
+  vm.deleteContact = ContactService.deleteContact;
 
   vm.message = ContactService.message;
 
@@ -107,18 +107,18 @@ angular.module('KitApp.controllers', [])
   vm.getContacts = function() {
     $cordovaContacts.pickContact()
      .then(function(result) {
-
-       if(isIOS == true){
+         console.log('Contact Picked');
+        //  alert('contact picked');
+       if(isIOS === true){
          ContactService.addContact(result.name.formatted, result.phoneNumbers[0].value);
-         ContactService.getContacts(id);
+        //  ContactService.getContacts(id);
         //  alert("Added Contact");
-
        } else {
          ContactService.addContact(result.name.formatted, result.phoneNumbers[0].value);
-         ContactService.getContacts(id);
-        //  alert("Added Contact");
+         console.log("Detected NON IOS");
+        //  ContactService.getContacts(id);
+        //  alert("Detected NON IOS");
        }
-
      });
    };
 

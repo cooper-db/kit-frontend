@@ -86,8 +86,8 @@
               <span class="input-label">Last Contacted</span>
               <input type="date" placeholder="last contacted" ng-model="form.last_contact">
             </label>
-            <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Close</button>
-            <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, form.last_contact, contact.id); form = {}" class="button button-stable button-block" style="margin-bottom:7%;">Edit Contact</button>
+            <button ng-click="contact.showEditFormFunc(); CC.setPristine()" class="button button-stable button-block">Cancel</button>
+            <button ng-click="contact.showEditFormFunc(); CC.editContact(form.name, form.phone, form.email, form.relationship, form.freq, form.notes, form.last_contact, contact.id); form = {}" class="button button-stable button-block" style="margin-bottom:7%;">Submit</button>
           </form>
         </li>
   </div>

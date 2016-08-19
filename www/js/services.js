@@ -65,14 +65,16 @@ angular.module('KitApp.services', [])
 
 }])
 
-.service('SignupService', ['$http', '$location', '$window', '$ionicHistory', 'routeToAPI', function($http, $location, $window, $ionicHistory, routeToAPI) {
+.service('SignupService', ['$http', '$location', '$window', '$ionicHistory', 'routeToAPI', 'ContactService', function($http, $location, $window, $ionicHistory, routeToAPI, ContactService) {
   var vm = this;
   vm.errors =[];
+
   vm.signup = function(user) {
     $http.post(routeToAPI.url + '/auth/signup', {username: user.username, password: user.password})
     .then(function(response){
       $window.sessionStorage.token = response.data.token;
       $window.sessionStorage.id = response.data.id;
+      ContactService.getContacts($window.sessionStorage.id);
       $ionicHistory.goBack();
       $location.path('/tab/contacts');
     })
@@ -120,6 +122,7 @@ angular.module('KitApp.services', [])
     $http.put(routeToAPI.url + '/users/' + id + '/contacts/' + contactId, {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq, notes:notes, last_contact:last_contact})
     .then(function(response) {
       console.log('edit contact reponse: ', response);
+      sv.contacts = {};
       sv.getContacts(id);
       $location.path('/tab/contacts');
     })
@@ -289,6 +292,8 @@ angular.module('KitApp.services', [])
     $http.post(routeToAPI.url + '/users/' + id + '/contacts', {name:name, phone:phone, email:email, relationship:relationship, frequency_of_contact:freq || 90, notes:notes})
     .then(function(response){
       console.log('successfully posted a new contact');
+      sv.contacts = {};
+      sv.getContacts(id);
       console.log(response.data);
     })
     .catch(function(err){
