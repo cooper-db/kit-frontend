@@ -7,15 +7,15 @@ angular.module('KitApp.services', [])
 
 //commment IN to hit LIVE HEROKU HOSTED DATABASE!
 //p.s. - you'll need to comment out the constant BELOW this one too!
-.constant("routeToAPI", {
-        "url": "https://keep-intouch.herokuapp.com",
-    })
+// .constant("routeToAPI", {
+//         "url": "https://keep-intouch.herokuapp.com",
+//     })
 
 // //comment IN to hit LOCALLY HOSTED DATABASE!
 // //p.s. - you'll need to comment out the constant ABOVE this one too!
-// .constant("routeToAPI", {
-//         "url": "http://localhost:3000",
-//     })
+.constant("routeToAPI", {
+        "url": "http://localhost:3000",
+    })
 //-----------------------------------------------------------------------------
 
 .service('LoginService', ['$http', '$location', '$window', 'ContactService', 'routeToAPI', function($http, $location, $window, ContactService, routeToAPI) {
