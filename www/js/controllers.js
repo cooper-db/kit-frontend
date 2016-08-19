@@ -23,9 +23,14 @@ angular.module('KitApp.controllers', [])
   vm.loginView = LoginService.loginView;
   vm.errors = SignupService.errors;
   vm.loginErrors = LoginService.errors;
+  vm.form = LoginService.loginForm;
 
   vm.login = function(username, password) {
-    LoginService.login(username, password);
+    LoginService.login(username, password).then(function(){
+      vm.form = {};
+      vm.loginErrors.message = {};
+    });
+    // vm.form = {};
   };
 
   vm.logout = function() {
@@ -52,6 +57,11 @@ angular.module('KitApp.controllers', [])
   vm.resetPassword = function(newPassword) {
     SignupService.resetPassword(newPassword);
     vm.resetResponse = SignupService.resetResponse;
+  };
+
+  vm.setPristine = function(){
+    console.log('setting pristine');
+    vm.loginForm.$setPristine();
   };
 
 }])
@@ -99,11 +109,6 @@ angular.module('KitApp.controllers', [])
      console.log('setting pristine');
      vm.editContactForm.$setPristine();
    };
-
-  //  vm.showArrowUp = ContactService.showArrowUp;
-  //  vm.showArrow = ContactService.showArrow;
-   //
-  //  vm.showArrowFunc = ContactService.showArrowFunc;
 
 }])
 

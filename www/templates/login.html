@@ -1,13 +1,18 @@
 <div class="card padding">
+  <form name="AC.loginForm">
   <label class="item item-input item-floating-label">
     <span class="input-label">Username</span>
-    <input type="text" placeholder="Username" ng-model="username">
+    <input type="text" placeholder="Username" ng-model="AC.form.username" name="username">
   </label>
   <label class="item item-input item-floating-label">
     <span class="input-label">Password</span>
-    <input type="password" placeholder="Password" ng-model="password">
+    <input type="password" placeholder="Password" ng-model="AC.form.password" name="password">
   </label>
   <p style="color:red;text-align:center">{{AC.loginErrors.message.data.message}}</p>
-  <button class="button button-block button-stable" ng-click="AC.login(username, password)">Login</button>
-  <a href="#/tab/account/signup" class="button button-block button-stable">Signup</a>
+  <button class="button button-outline button-assertive button-block" ng-click="AC.login(AC.form.username, AC.form.password)">Login</button>
+  </form>
+</div>
+<div style="padding-top: 12em">
+  <h5 style="text-align: center; color: white">Don't have an account?</h5>
+  <a href="#/tab/account/signup" class="button button-light button-block">Signup</a>
 </div>

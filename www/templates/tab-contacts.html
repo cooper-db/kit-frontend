@@ -8,8 +8,8 @@
   <ion-content class="padding contact">
 
     <!-- Jimmy's contact button -->
-    <button class="button button-positive button-block ion-ios-cloud-download-outline" ng-click="CC.getContacts()" ng-disabled="CC.loginView.show"> Import Contact from Phone </button>
-    <button class="button button-positive button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>
+    <button class="button button-light button-block ion-ios-cloud-download-outline" ng-click="CC.getContacts()" ng-disabled="CC.loginView.show"> Import Contact from Phone </button>
+    <button class="button button-outline button-light button-block ion-plus-round" ng-click="CC.showAddContactForm = !CC.showAddContactForm" ng-disabled="CC.loginView.show"> Add Contact </button>
 
     <ka-add-contact ng-show="CC.showAddContactForm"></ka-add-contact>
 
