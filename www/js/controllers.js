@@ -23,6 +23,7 @@ angular.module('KitApp.controllers', [])
   vm.loginView = LoginService.loginView;
   vm.errors = SignupService.errors;
   vm.loginErrors = LoginService.errors;
+  vm.loginForm = LoginService.loginForm; 
 
   vm.login = function(username, password) {
     LoginService.login(username, password);

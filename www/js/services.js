@@ -35,6 +35,9 @@ angular.module('KitApp.services', [])
     $http.post(routeToAPI.url + '/auth/login', {username: username, password: password})
     .then(function(response) {
       console.log(response);
+
+      vm.loginForm = {}; 
+
       $window.sessionStorage.token = response.data.token;
       vm.loginView.show = false;
       $window.sessionStorage.id = response.data.id;
