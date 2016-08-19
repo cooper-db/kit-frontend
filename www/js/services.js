@@ -32,24 +32,29 @@ angular.module('KitApp.services', [])
   vm.contacts;
 
   vm.login = function(username, password) {
-    $http.post(routeToAPI.url + '/auth/login', {username: username, password: password})
-    .then(function(response) {
-      console.log(response);
+    return new Promise(function(resolve, reject){
+      $http.post(routeToAPI.url + '/auth/login', {username: username, password: password})
+      .then(function(response) {
+        console.log(response);
 
-      vm.loginForm = {}; 
+        vm.loginForm = {};
 
-      $window.sessionStorage.token = response.data.token;
-      vm.loginView.show = false;
-      $window.sessionStorage.id = response.data.id;
-      ContactService.getContacts();
-      $location.path('/tab/home');
+        $window.sessionStorage.token = response.data.token;
+        vm.loginView.show = false;
+        $window.sessionStorage.id = response.data.id;
+        ContactService.getContacts();
+        $location.path('/tab/home');
+        resolve();
+      })
+      .catch(function(err) {
+        console.log(err);
+        delete $window.sessionStorage.token;
+        vm.loginView.show = true;
+        vm.errors.message = err;
+        reject()
+      });
     })
-    .catch(function(err) {
-      console.log(err);
-      delete $window.sessionStorage.token;
-      vm.loginView.show = true;
-      vm.errors.message = err;
-    });
+
   };
 
   vm.logout = function() {

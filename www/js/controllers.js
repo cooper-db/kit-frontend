@@ -23,10 +23,14 @@ angular.module('KitApp.controllers', [])
   vm.loginView = LoginService.loginView;
   vm.errors = SignupService.errors;
   vm.loginErrors = LoginService.errors;
-  vm.loginForm = LoginService.loginForm; 
+  vm.form = LoginService.loginForm;
 
   vm.login = function(username, password) {
-    LoginService.login(username, password);
+    LoginService.login(username, password).then(function(){
+      vm.form = {};
+      vm.loginErrors.message = {};
+    });
+    // vm.form = {};
   };
 
   vm.logout = function() {
