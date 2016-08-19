@@ -36,20 +36,30 @@ ionic resources
 ##Android
 
 ###Install java
+```bash
 brew cask install java
+```
 
 ###Install android sdk
+```bash
 brew install android-sdk
+```
 
-# Add android home to path and source path
+### Add android home to path and source path
+```bash
 echo "export ANDROID_HOME=/usr/local/opt/android-sdk" >> ~/.bash_profile
 source ~/.bash_profile
+```
 
 ###Install android build tools / platform tools & sdk
+```bash
 android
+```
 
 ###Select latest build tools / platform tools and download android sdk 23 (v6)
+```bash
 ionic run android
+```
 
 - open chrome dev tools > options > more tools > inspect devices > inspect
 
@@ -57,14 +67,17 @@ ionic run android
 
 - tap build number 5 or 7 or 9 or something times to enable dev tools
 
+###Plugins
+```bash
+cordova plugin add cordova-sms-plugin
+```
+
 ##ios
+Currently to experience KiT on ios, you must be a registered Apple developer. Install the project in xcode and run a build on a test device.
+###ios debugger
 
 - safari > preferences > dev menu checkbox > develop on toolbar > simulator
 
 
-###Push Plugin
-- ```bash
-  ionic plugin add phonegap-plugin-push --variable SENDER_ID="jimmyMac"
-  ```
 ###Navigate to front-end repository and follow installation instructions:
 [https://github.com/cooper-db/kit-front-end](https://github.com/cooper-db/kit-front-end)
