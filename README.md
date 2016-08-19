@@ -36,20 +36,30 @@ ionic resources
 ##Android
 
 ###Install java
+```bash
 brew cask install java
+```
 
 ###Install android sdk
+```bash
 brew install android-sdk
+```
 
-# Add android home to path and source path
+### Add android home to path and source path
+```bash
 echo "export ANDROID_HOME=/usr/local/opt/android-sdk" >> ~/.bash_profile
 source ~/.bash_profile
+```
 
 ###Install android build tools / platform tools & sdk
+```bash
 android
+```
 
 ###Select latest build tools / platform tools and download android sdk 23 (v6)
+```bash
 ionic run android
+```
 
 - open chrome dev tools > options > more tools > inspect devices > inspect
 
@@ -62,9 +72,10 @@ ionic run android
 - safari > preferences > dev menu checkbox > develop on toolbar > simulator
 
 
-###Push Plugin
-- ```bash
-  ionic plugin add phonegap-plugin-push --variable SENDER_ID="jimmyMac"
-  ```
+###Plugins
+```bash
+cordova plugin add cordova-sms-plugin
+```
+
 ###Navigate to front-end repository and follow installation instructions:
 [https://github.com/cooper-db/kit-front-end](https://github.com/cooper-db/kit-front-end)
