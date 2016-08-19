@@ -2,14 +2,14 @@
   <form name="AC.loginForm">
   <label class="item item-input item-floating-label">
     <span class="input-label">Username</span>
-    <input type="text" placeholder="Username" ng-model="username">
+    <input type="text" placeholder="Username" ng-model="form.username" name="username">
   </label>
   <label class="item item-input item-floating-label">
     <span class="input-label">Password</span>
-    <input type="password" placeholder="Password" ng-model="password">
+    <input type="password" placeholder="Password" ng-model="form.password" name="password">
   </label>
   <p style="color:red;text-align:center">{{AC.loginErrors.message.data.message}}</p>
-  <button class="button button-outline button-assertive button-block" ng-click="AC.setPristine(); form = {}; AC.login(username, password)">Login</button>
+  <button class="button button-outline button-assertive button-block" ng-click="AC.login(form.username, form.password); form = {}">Login</button>
   </form>
 </div>
 <div style="padding-top: 12em">
