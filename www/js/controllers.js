@@ -14,14 +14,16 @@ angular.module('KitApp.controllers', [])
 
   vm.suggestions = ContactService.possibleSuggestions;
 
-  vm.sendSms =   function(number, message){
+  vm.smsMessage = "Hi, ";
+
+  vm.sendSms =   function(number){
     var options = {
       replaceLineBreaks: true, // true to replace \n by a new line, false by default
       android: {
-        intent: ''
+        intent: 'INTENT'
       }
     };
-    return $cordovaSms.send(number, message, options).then(function(data){
+    return $cordovaSms.send(number, vm.smsMessage, options).then(function(data){
       // ContactService.editContact();
       console.log(data);
     });

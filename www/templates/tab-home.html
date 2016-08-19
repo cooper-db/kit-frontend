@@ -16,22 +16,18 @@
     </div>
     <div ng-hide="HC.loginView.show || HC.contacts.length === 0 || HC.suggestions.length === 0">
       <h2 style="text-align:center;color:white">Let's get in touch with:</h2>
-      <h1 style="text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:7em">{{HC.contacts.randomContact.name}}</h1>
-      <h1 style="text-align:center;color:white">Today!</h1>
+      <h1 style="white-space:nowrap;text-align:center;color:white;font-family:'Londrina Outline',cursive;font-size:5em">{{HC.contacts.randomContact.name}}</h1>
+      <h2 style="text-align:center;color:white">Today!</h2>
       <hr>
-      <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.phone}}</h3>
-      <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.email}}</h3>
+      <button class="button button-stable button-block signin" href="#/tab/account" type="button" name="send" ng-click="HC.sendSms(HC.contacts.randomContact.phone)">Send a Text!</button>
       <hr>
-      <h3 style="text-align:center;color:white">Notes:</h3>
-      <h3 style="text-align:center;color:white">{{HC.contacts.randomContact.notes}}</h3>
+      <h4 style="text-align:center;color:white">Details</h4>
+      <h5 style="color:white">Phone: {{HC.contacts.randomContact.phone}}</h5>
+      <h5 style="color:white">Email: {{HC.contacts.randomContact.email}}</h5>
+      <h5 style="color:white">Notes:{{HC.contacts.randomContact.notes}}</h5>
       <hr>
       <button class="button button-block button-stable button-large" ng-click="HC.contacts.updateLastContact()">Did it!</button>
       <button class="button button-block button-stable button-large" ng-show="HC.suggestions.length > 0" ng-click="HC.contacts.getRandomContact()">Another</button>
-      <div class="input-group">
-        <span class="input-group-addon">Send a quick message to {{HC.contacts.randomContact.name}} </span>
-        <input type="text"  placeholder="" ng-model="HC.smsMessage">
-        <button type="button" name="send" ng-click="HC.sendSms(HC.contacts.randomContact.phone, HC.smsMessage)">Send!</button>
-      </div>
     </div>
     <div ng-show="HC.suggestions.current && HC.loginView.show === false">
         <h2 style="color:white;text-align:center">You're current! - There are no remaining suggestions.</h2>
