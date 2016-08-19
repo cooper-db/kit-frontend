@@ -67,15 +67,17 @@ ionic run android
 
 - tap build number 5 or 7 or 9 or something times to enable dev tools
 
-##ios
-
-- safari > preferences > dev menu checkbox > develop on toolbar > simulator
-
-
 ###Plugins
 ```bash
 cordova plugin add cordova-sms-plugin
 ```
+
+##ios
+Currently to experience KiT on ios, you must be a registered Apple developer. Install the project in xcode and run a build on a test device.
+###ios debugger
+
+- safari > preferences > dev menu checkbox > develop on toolbar > simulator
+
 
 ###Navigate to front-end repository and follow installation instructions:
 [https://github.com/cooper-db/kit-front-end](https://github.com/cooper-db/kit-front-end)
