@@ -54,6 +54,11 @@ angular.module('KitApp.controllers', [])
     vm.resetResponse = SignupService.resetResponse;
   };
 
+  vm.setPristine = function(){
+    console.log('setting pristine');
+    vm.loginForm.$setPristine();
+  };
+
 }])
 
 
@@ -99,11 +104,6 @@ angular.module('KitApp.controllers', [])
      console.log('setting pristine');
      vm.editContactForm.$setPristine();
    };
-
-  //  vm.showArrowUp = ContactService.showArrowUp;
-  //  vm.showArrow = ContactService.showArrow;
-   //
-  //  vm.showArrowFunc = ContactService.showArrowFunc;
 
 }])
 
