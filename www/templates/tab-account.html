@@ -6,7 +6,7 @@
   <ion-content class="padding account">
     <ka-login ng-show="AC.loginView.show"></ka-login>
     <button class="button button-block button-assertive" ng-click="AC.logout()" ng-hide="AC.loginView.show">Logout</button>
-    <button class="button button-block button-positive" ng-click="AC.resetFormToggle()" ng-hide="AC.loginView.show">Reset Password</button>
+    <button class="button button-light button-block" ng-click="AC.resetFormToggle()" ng-hide="AC.loginView.show">Reset Password</button>
 
     <div class="card padding" ng-show="AC.resetForm.show">
       <form name="signupForm"  ng-submit="AC.resetPassword(user.password)">
