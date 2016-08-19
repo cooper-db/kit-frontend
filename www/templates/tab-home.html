@@ -27,6 +27,11 @@
       <hr>
       <button class="button button-block button-stable button-large" ng-click="HC.contacts.updateLastContact()">Did it!</button>
       <button class="button button-block button-stable button-large" ng-show="HC.suggestions.length > 0" ng-click="HC.contacts.getRandomContact()">Another</button>
+      <div class="input-group">
+        <span class="input-group-addon">Send a quick message to {{HC.contacts.randomContact.name}} </span>
+        <input type="text"  placeholder="" ng-model="HC.smsMessage">
+        <button type="button" name="send" ng-click="HC.sendSms(HC.contacts.randomContact.phone, HC.smsMessage)">Send!</button>
+      </div>
     </div>
     <div ng-show="HC.suggestions.current && HC.loginView.show === false">
         <h2 style="color:white;text-align:center">You're current! - There are no remaining suggestions.</h2>

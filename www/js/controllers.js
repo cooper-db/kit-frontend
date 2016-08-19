@@ -2,7 +2,7 @@
 
 angular.module('KitApp.controllers', [])
 
-.controller('HomeController', ['LoginService', 'ContactService', function(LoginService, ContactService) {
+.controller('HomeController', ['LoginService', 'ContactService', '$cordovaSms', function(LoginService, ContactService, $cordovaSms) {
 
   var vm = this;
 
@@ -13,6 +13,21 @@ angular.module('KitApp.controllers', [])
   vm.updateLastContact = ContactService.editContact;
 
   vm.suggestions = ContactService.possibleSuggestions;
+
+  vm.sendSms =   function(number, message){
+    var options = {
+      replaceLineBreaks: true, // true to replace \n by a new line, false by default
+      android: {
+        intent: ''
+      }
+    };
+    return $cordovaSms.send(number, message, options).then(function(data){
+      // ContactService.editContact();
+      console.log(data);
+    });
+  };
+
+
 
 }])
 
